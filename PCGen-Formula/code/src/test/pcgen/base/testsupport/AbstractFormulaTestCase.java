@@ -135,12 +135,11 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			}});
 	}
 
-	public void isValid(String formula, SimpleNode node,
-		FormatManager<?> formatManager, Class<?> assertedFormat)
+	public void isValid(String formula, SimpleNode node, FormatManager<?> formatManager)
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
+			localSetup.getFormulaManager(), getGlobalScope(), null);
 		semanticsVisitor.visit(node, semantics);
 		if (!semantics.isValid())
 		{
@@ -203,12 +202,11 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			localSetup.getGlobalScopeInst(), Number.class);
 	}
 
-	protected void isNotValid(String formula, SimpleNode node,
-		FormatManager<?> formatManager, Class<?> assertedFormat)
+	protected void isNotValid(String formula, SimpleNode node, FormatManager<?> formatManager)
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
+			localSetup.getFormulaManager(), getGlobalScope(), null);
 		semanticsVisitor.visit(node, semantics);
 		if (semantics.isValid())
 		{
