@@ -33,7 +33,7 @@ import pcgen.base.testsupport.AbstractFormulaTestCase;
 public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 {
 	private AggressiveSolverManager manager;
-	private SolverFactory solverFactory = new SolverFactory();
+	private final SolverFactory solverFactory = new SolverFactory();
 	private VariableLibrary varLibrary;
 	private WriteableVariableStore store;
 	private LegalScope globalScope;
