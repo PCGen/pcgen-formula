@@ -41,8 +41,7 @@ public class SimpleVariableStore implements WriteableVariableStore
 	/**
 	 * The underlying map serving as the storage for this SimpleVariableStore.
 	 */
-	private final Map<VariableID<?>, Object> resultsMap =
-			new HashMap<VariableID<?>, Object>();
+	private final Map<VariableID<?>, Object> resultsMap = new HashMap<>();
 
 	/**
 	 * Returns the value in this SimpleVariableStore for the given VariableID.

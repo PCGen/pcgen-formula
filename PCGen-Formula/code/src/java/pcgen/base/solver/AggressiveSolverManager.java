@@ -58,8 +58,7 @@ public class AggressiveSolverManager
 	 * The relationship from each VariableID to the Solver calculating the value
 	 * of the VariableID.
 	 */
-	private final Map<VariableID<?>, Solver<?>> scopedChannels =
-			new HashMap<VariableID<?>, Solver<?>>();
+	private final Map<VariableID<?>, Solver<?>> scopedChannels = new HashMap<>();
 
 	/**
 	 * The "summarized" results of the calculation of each Solver.
@@ -231,8 +230,7 @@ public class AggressiveSolverManager
 			 * operations risk (2) Process can still write to cache knowing ID
 			 */
 			@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-			DefaultDirectionalGraphEdge<VariableID<?>> edge =
-					new DefaultDirectionalGraphEdge<VariableID<?>>(depID, varID);
+			DefaultDirectionalGraphEdge<VariableID<?>> edge = new DefaultDirectionalGraphEdge<>(depID, varID);
 			graph.addEdge(edge);
 		}
 		//Cast above effectively enforced here

@@ -38,8 +38,7 @@ public class SolverFactory implements DefaultStore
 	 * The map containing the relationship between a format of Solver and the
 	 * default Modifier for that format of Solver.
 	 */
-	private final Map<Class<?>, Modifier<?>> defaultModifierMap =
-			new HashMap<Class<?>, Modifier<?>>();
+	private final Map<Class<?>, Modifier<?>> defaultModifierMap = new HashMap<>();
 
 	/**
 	 * Adds a relationship between a Solver format and a default Modifier for
@@ -148,7 +147,7 @@ public class SolverFactory implements DefaultStore
 				"Cannot create Solver of format " + formatManager
 					+ " because no default was provided for that format");
 		}
-		return new Solver<T>(defaultModifier, evaluationManager);
+		return new Solver<>(defaultModifier, evaluationManager);
 	}
 
 	/**
