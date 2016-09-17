@@ -31,10 +31,9 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 	{
 		private final int value;
 
-		private PrivateSetNumber(int inherent, Class<Number> cl, int priority,
-			int value)
+		private PrivateSetNumber(Class<Number> cl, int priority, int value)
 		{
-			super(inherent, cl, priority);
+			super(0, cl, priority);
 			this.value = value;
 		}
 
@@ -163,7 +162,7 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 	public static AbstractModifier<Number> setNumber(final int value,
 		int priority)
 	{
-		return new PrivateSetNumber(0, NUMBER_CLASS, priority, value);
+		return new PrivateSetNumber(NUMBER_CLASS, priority, value);
 	}
 
 	public static AbstractModifier<String> setString()
