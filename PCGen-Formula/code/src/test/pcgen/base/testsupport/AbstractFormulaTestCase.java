@@ -47,7 +47,7 @@ import pcgen.base.util.FormatManager;
 public abstract class AbstractFormulaTestCase extends TestCase
 {
 
-	protected FormatManager<Number> numberManager = FormatUtilities.NUMBER_MANAGER;
+	protected final FormatManager<Number> numberManager = FormatUtilities.NUMBER_MANAGER;
 	protected FormatManager<String> stringManager = FormatUtilities.STRING_MANAGER;
 
 	private SplitFormulaSetup setup;
