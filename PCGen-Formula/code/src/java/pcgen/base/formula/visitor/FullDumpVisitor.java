@@ -54,7 +54,7 @@ class FullDumpVisitor implements FormulaParserVisitor
 	 * An embedded ReconstructionVisitor used to reconstruct the formula, as the
 	 * reconstructed version is provided as part of the debugging output.
 	 */
-	private final ReconstructionVisitor reconVisitor =
+	private final FormulaParserVisitor reconVisitor =
 			new ReconstructionVisitor();
 
 	@Override

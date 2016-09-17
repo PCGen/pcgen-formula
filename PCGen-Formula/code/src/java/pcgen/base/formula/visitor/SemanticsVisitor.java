@@ -210,7 +210,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Processes a numeric node. This ensures that the node has no children and
 	 * that it can be parsed as a numeric value.
 	 */
-	public static Object visit(ASTNum node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -264,7 +264,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		 * Validate the function contents (remember it can have other complex
 		 * structures inside of it)
 		 */
-		ASTPCGenSingleWord ftnNode = (ASTPCGenSingleWord) firstChild;
+		SimpleNode ftnNode = (ASTPCGenSingleWord) firstChild;
 		String name = ftnNode.getText();
 		Node argNode = node.jjtGetChild(1);
 		if (argNode instanceof ASTFParen)
@@ -332,7 +332,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * VariableIDFactory that the variable usage is valid within the scope
 	 * recognized by this SemanticsVisitor.
 	 */
-	public static Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -542,7 +542,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Generates an invalid argument count report based on the given node and
 	 * expected argument count.
 	 */
-	private static String getInvalidCountReport(SimpleNode node, int expectedCount)
+	private static String getInvalidCountReport(Node node, int expectedCount)
 	{
 		int argLength = node.jjtGetNumChildren();
 		Node[] args = new Node[argLength];

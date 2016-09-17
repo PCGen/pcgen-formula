@@ -118,7 +118,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * 
 	 *
 	 */
-	public Object visit(SimpleNode node)
+	public Object visit(Node node)
 	{
 		//Delegate to the appropriate class
 		return node.jjtAccept(this, null);
@@ -244,7 +244,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	@Override
 	public Object visit(ASTPCGenLookup node, Object data)
 	{
-		ASTPCGenSingleWord fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
+		SimpleNode fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
 		Node argNode = node.jjtGetChild(1);
 		if (argNode instanceof ASTFParen)
 		{
@@ -344,7 +344,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 *            determine if it is static
 	 * @return TRUE if the first child of this node is static; FALSE otherwise
 	 */
-	private Object singleChildStatic(SimpleNode node)
+	private Object singleChildStatic(Node node)
 	{
 		return node.jjtGetChild(0).jjtAccept(this, null);
 	}

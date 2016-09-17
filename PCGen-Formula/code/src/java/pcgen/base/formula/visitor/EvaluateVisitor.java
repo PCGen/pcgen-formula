@@ -182,7 +182,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Returns the contents of the node, which is a numeric value.
 	 */
-	public static Object visit(ASTNum node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		String nodeText = node.getText();
 		try
@@ -207,7 +207,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	public Object visit(ASTPCGenLookup node, Object data)
 	{
 		EvaluationManager manager = (EvaluationManager) data;
-		ASTPCGenSingleWord fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
+		SimpleNode fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
 		String name = fnode.getText();
 		Node argNode = node.jjtGetChild(1);
 		Node[] args = VisitorUtilities.accumulateArguments(argNode);
@@ -233,7 +233,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * VariableID and then fetch the value for that VariableID from the
 	 * VariableStore (cache).
 	 */
-	public static Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		return visitVariable(node.getText(), (EvaluationManager) data);
 	}
@@ -269,7 +269,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Evaluates a Quoted String (so obviously returns a String).
 	 */
-	public static Object visit(ASTQuotString node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		//The quotes are stripped by the parser
 		return node.getText();
@@ -326,7 +326,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 *            The EvaluationManager used in evaluation
 	 * @return The result of the evaluation on the child of the given node
 	 */
-	private Object evaluateSingleChild(SimpleNode node, Object data)
+	private Object evaluateSingleChild(Node node, Object data)
 	{
 		return node.jjtGetChild(0).jjtAccept(this, data);
 	}
