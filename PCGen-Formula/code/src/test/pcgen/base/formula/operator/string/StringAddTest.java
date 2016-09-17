@@ -114,7 +114,7 @@ public class StringAddTest extends TestCase
 			assertNull(op.evaluate("ABC", true));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -123,7 +123,7 @@ public class StringAddTest extends TestCase
 			assertNull(op.evaluate(new Object(), "DEF"));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

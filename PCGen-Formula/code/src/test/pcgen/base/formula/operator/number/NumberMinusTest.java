@@ -82,7 +82,7 @@ public class NumberMinusTest extends TestCase
 			assertNull(op.evaluate(true));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

@@ -117,7 +117,7 @@ public class GenericNotEqualTest extends TestCase
 				fail("Unequal types cannot be equal");
 			}
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -129,7 +129,7 @@ public class GenericNotEqualTest extends TestCase
 				fail("Unequal types cannot be equal");
 			}
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
