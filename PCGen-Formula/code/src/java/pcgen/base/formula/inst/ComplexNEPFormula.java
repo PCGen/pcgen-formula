@@ -131,7 +131,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	public T resolve(EvaluationManager manager)
 	{
 		@SuppressWarnings("unchecked")
-		T result = (T) EVALUATE_VISITOR.visit(root, manager);
+		T result = (T) ComplexNEPFormula.EVALUATE_VISITOR.visit(root, manager);
 		return result;
 	}
 
@@ -160,7 +160,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 			throw new IllegalArgumentException(
 				"Cannot get formula dependencies with null DependencyManager");
 		}
-		DEPENDENCY_VISITOR.visit(root, depManager);
+		ComplexNEPFormula.DEPENDENCY_VISITOR.visit(root, depManager);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 		//semantics.set(FormulaSemantics.BASE_FORMAT, expectedFormat);
 		@SuppressWarnings("PMD.PrematureDeclaration")
 		FormatManager<?> formulaFormat =
-				(FormatManager<?>) SEMANTICS_VISITOR.visit(root, semantics);
+				(FormatManager<?>) ComplexNEPFormula.SEMANTICS_VISITOR.visit(root, semantics);
 		if (!semantics.isValid())
 		{
 			return;
@@ -189,7 +189,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	public String toString()
 	{
 		CharSequence sb = new StringBuilder();
-		RECONSTRUCTION_VISITOR.visit(root, sb);
+		ComplexNEPFormula.RECONSTRUCTION_VISITOR.visit(root, sb);
 		return sb.toString();
 	}
 }

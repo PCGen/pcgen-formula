@@ -67,7 +67,7 @@ public class ArgFunction implements Function
 	@Override
 	public String getFunctionName()
 	{
-		return FUNCTION_NAME;
+		return ArgFunction.FUNCTION_NAME;
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class ArgFunction implements Function
 	{
 		if (args.length != 1)
 		{
-			semantics.setInvalid("Function " + FUNCTION_NAME
+			semantics.setInvalid("Function " + ArgFunction.FUNCTION_NAME
 				+ " received incorrect # of arguments, expected: 0 got "
 				+ args.length + " " + Arrays.asList(args));
 			return null;
@@ -99,7 +99,7 @@ public class ArgFunction implements Function
 		Node node = args[0];
 		if (!(node instanceof ASTNum))
 		{
-			semantics.setInvalid("Parse Error: Function " + FUNCTION_NAME
+			semantics.setInvalid("Parse Error: Function " + ArgFunction.FUNCTION_NAME
 				+ " received invalid argument format,"
 				+ " expected: ASTNum got " + node.getClass().getName() + ": "
 				+ node);
@@ -111,13 +111,13 @@ public class ArgFunction implements Function
 			int argNum = Integer.parseInt(nodeText);
 			if ((argNum < 0) || (argNum >= masterArgs.length))
 			{
-				semantics.setInvalid("Function " + FUNCTION_NAME
+				semantics.setInvalid("Function " + ArgFunction.FUNCTION_NAME
 					+ " received incorrect # of arguments, expected: "
 					+ (argNum + 1) + " got " + masterArgs.length + " "
 					+ Arrays.asList(masterArgs));
 				return null;
 			}
-			assertArgs(semantics, argNum);
+			ArgFunction.assertArgs(semantics, argNum);
 			Node n = masterArgs[argNum];
 			return (FormatManager<?>) n.jjtAccept(visitor, semantics);
 		}

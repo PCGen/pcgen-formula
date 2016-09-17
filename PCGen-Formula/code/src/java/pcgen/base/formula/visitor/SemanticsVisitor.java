@@ -246,7 +246,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		//Two children are function name and the grouping (parens/brackets)
 		if (node.jjtGetNumChildren() != 2)
 		{
-			semantics.setInvalid(getInvalidCountReport(node, 2));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 2));
 			return null;
 		}
 		Node firstChild = node.jjtGetChild(0);
@@ -308,7 +308,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 				+ " must resolve to a number");
 			return null;
 		}
-		FormatManager<?> formatManager = getVariableFormat(semantics, name);
+		FormatManager<?> formatManager = SemanticsVisitor.getVariableFormat(semantics, name);
 		if (formatManager == null)
 		{
 			semantics.setInvalid("Variable: " + name
@@ -444,7 +444,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		}
 		if (node.jjtGetNumChildren() != 2)
 		{
-			semantics.setInvalid(getInvalidCountReport(node, 2));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 2));
 			return null;
 		}
 		Node child1 = node.jjtGetChild(0);
@@ -531,7 +531,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		if (node.jjtGetNumChildren() != 1)
 		{
 			FormulaSemantics semantics = (FormulaSemantics) data;
-			semantics.setInvalid(getInvalidCountReport(node, 1));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 1));
 			return null;
 		}
 		Node child = node.jjtGetChild(0);

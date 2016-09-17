@@ -112,8 +112,7 @@ public class GenericFunction implements Function
 	public final FormatManager<?> allowArgs(SemanticsVisitor visitor,
 		Node[] args, FormulaSemantics semantics)
 	{
-		FormulaManager withArgs =
-				getManager(args, semantics.peek(FormulaSemantics.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, semantics.peek(FormulaSemantics.FMANAGER));
 		//Need to save original to handle "embedded" GenericFunction objects properly
 		semantics.push(ArgumentDependencyManager.KEY,
 			new ArgumentDependencyManager());
@@ -148,8 +147,7 @@ public class GenericFunction implements Function
 	public Object evaluate(EvaluateVisitor visitor, Node[] args,
 		EvaluationManager manager)
 	{
-		FormulaManager withArgs =
-				getManager(args, manager.peek(EvaluationManager.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, manager.peek(EvaluationManager.FMANAGER));
 		manager.push(EvaluationManager.FMANAGER, withArgs);
 		Object result = visitor.visit(root, manager);
 		manager.pop(EvaluationManager.FMANAGER);
@@ -194,8 +192,7 @@ public class GenericFunction implements Function
 	public void getDependencies(DependencyVisitor visitor,
 		DependencyManager manager, Node[] args)
 	{
-		FormulaManager withArgs =
-				getManager(args, manager.peek(DependencyManager.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, manager.peek(DependencyManager.FMANAGER));
 		manager.push(DependencyManager.FMANAGER, withArgs);
 		visitor.visit(root, manager);
 		manager.pop(DependencyManager.FMANAGER);
