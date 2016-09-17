@@ -166,8 +166,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		performEvaluation(formula, node, valueOf, manager);
 	}
 
-	public void performEvaluation(String formula, SimpleNode node,
-		Object valueOf, EvaluationManager manager)
+	public static void performEvaluation(String formula, SimpleNode node, Object valueOf, EvaluationManager manager)
 	{
 		Object result = new EvaluateVisitor().visit(node, manager);
 		if (result.equals(valueOf))

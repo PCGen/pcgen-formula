@@ -332,7 +332,7 @@ public class VariableLibrary
 	/**
 	 * Ensure a name is not null, zero length, or whitespace padded.
 	 */
-	private void checkLegalVarName(String varName)
+	private static void checkLegalVarName(String varName)
 	{
 		if (varName == null)
 		{

@@ -229,8 +229,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	/**
 	 * Numbers are always static. :)
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		return Boolean.TRUE;
 	}
@@ -268,8 +267,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	/**
 	 * Variables are always NOT static. :(
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		return Boolean.FALSE;
 	}
@@ -281,8 +279,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * error in the implementation of the formula or a tree structure problem in
 	 * the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -296,8 +293,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * error in the implementation of the formula or a tree structure problem in
 	 * the formula.
 	 */
-	@Override
-	public Object visit(ASTFParen node, Object data)
+	public static Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -307,8 +303,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	/**
 	 * Strings are always static :)
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(ASTQuotString node, Object data)
 	{
 		return Boolean.TRUE;
 	}

@@ -201,7 +201,7 @@ public class GenericFunction implements Function
 		manager.pop(DependencyManager.FMANAGER);
 	}
 
-	private FormulaManager getManager(Node[] args, FormulaManager formulaManager)
+	private static FormulaManager getManager(Node[] args, FormulaManager formulaManager)
 	{
 		FunctionLibrary argLibrary =
 				new ArgWrappingLibrary(formulaManager.getLibrary(), args);

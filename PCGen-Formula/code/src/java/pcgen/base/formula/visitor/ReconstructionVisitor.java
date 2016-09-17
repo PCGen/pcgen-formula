@@ -204,8 +204,7 @@ public class ReconstructionVisitor implements FormulaParserVisitor
 	/**
 	 * Processes a numeric node, so involves writing the text of the node.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		StringBuilder sb = (StringBuilder) data;
 		sb.append(node.getText());
@@ -226,8 +225,7 @@ public class ReconstructionVisitor implements FormulaParserVisitor
 	/**
 	 * Processes a word node, so involves writing the text of the node.
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		StringBuilder sb = (StringBuilder) data;
 		sb.append(node.getText());
@@ -272,8 +270,7 @@ public class ReconstructionVisitor implements FormulaParserVisitor
 	 * Processes the quoted string node, so it writes a quote followed by the
 	 * text, followed by a closing quote.
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(ASTQuotString node, Object data)
 	{
 		StringBuilder sb = (StringBuilder) data;
 		sb.append('"').append(node.getText()).append('"');

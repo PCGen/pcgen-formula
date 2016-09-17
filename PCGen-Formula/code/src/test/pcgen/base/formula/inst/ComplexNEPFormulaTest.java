@@ -227,7 +227,7 @@ public class ComplexNEPFormulaTest extends TestCase
 			.getMaximumArgument());
 	}
 
-	private DependencyManager setupDM(IndividualSetup indSetup)
+	private static DependencyManager setupDM(IndividualSetup indSetup)
 	{
 		DependencyManager dm =
 				DependencyManager.generate(indSetup.getFormulaManager(),

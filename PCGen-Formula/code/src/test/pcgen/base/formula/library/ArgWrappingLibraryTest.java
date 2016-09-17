@@ -105,7 +105,7 @@ public class ArgWrappingLibraryTest extends AbstractFormulaTestCase
 		assertEquals(1, library.getFunction("arg").evaluate(visitor, args, null));
 	}
 
-	private Function getPseudoFunction(final String name)
+	private static Function getPseudoFunction(final String name)
 	{
 		return new Function()
 		{
