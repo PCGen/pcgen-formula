@@ -364,7 +364,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * @return The format for the given Variable, in the scope as described by
 	 *         the FormulaSemantics
 	 */
-	public static FormatManager<?> getVariableFormat(FormulaSemantics semantics, String varName)
+	private static FormatManager<?> getVariableFormat(FormulaSemantics semantics, String varName)
 	{
 		VariableLibrary varLib =
 				semantics.peek(FormulaSemantics.FMANAGER).getFactory();

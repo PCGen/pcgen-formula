@@ -46,7 +46,7 @@ import pcgen.base.util.FormatManager;
  * the AggressiveSolverManager will build and manage the associated Solver for
  * that VariableID.
  */
-public class AggressiveSolverManager
+class AggressiveSolverManager
 {
 
 	/**
@@ -369,7 +369,7 @@ public class AggressiveSolverManager
 	 *            The VariableID as a starting point for triggering Solvers to
 	 *            be processed
 	 */
-	public void solveFromNode(VariableID<?> varID)
+	private void solveFromNode(VariableID<?> varID)
 	{
 		boolean warning = varStack.contains(varID);
 		try
@@ -404,7 +404,7 @@ public class AggressiveSolverManager
 	 *            The VariableID for which the children will be used as a
 	 *            starting point for triggering Solvers to be processed
 	 */
-	public void solveChildren(VariableID<?> varID)
+	private void solveChildren(VariableID<?> varID)
 	{
 		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : graph
 			.getAdjacentEdges(varID))
