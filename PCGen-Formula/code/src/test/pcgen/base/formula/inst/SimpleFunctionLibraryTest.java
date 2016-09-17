@@ -112,7 +112,7 @@ public class SimpleFunctionLibraryTest extends TestCase
 		}
 	}
 
-	private Function getPseudoFunction(final String name)
+	private static Function getPseudoFunction(final String name)
 	{
 		return new Function()
 		{
