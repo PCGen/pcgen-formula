@@ -17,19 +17,18 @@
  */
 package pcgen.base.formula.inst;
 
-import org.junit.Test;
-
-import junit.framework.TestCase;
 import pcgen.base.formula.base.LegalScopeLibrary;
 import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VarScoped;
+
+import junit.framework.TestCase;
+import org.junit.Test;
 
 public class ScopeInstanceFactoryTest extends TestCase
 {
 
 	private ScopeInstanceFactory factory;
 	private LegalScopeLibrary library;
-	private SimpleLegalScope scope;
 	private ScopeInstance scopeInst;
 	private SimpleLegalScope local;
 
@@ -39,7 +38,7 @@ public class ScopeInstanceFactoryTest extends TestCase
 		super.setUp();
 		library = new LegalScopeLibrary();
 		factory = new ScopeInstanceFactory(library);
-		scope = new SimpleLegalScope(null, "Global");
+		SimpleLegalScope scope = new SimpleLegalScope(null, "Global");
 		library.registerScope(scope);
 		scopeInst = factory.getGlobalInstance("Global");
 		local = new SimpleLegalScope(scope, "Local");
