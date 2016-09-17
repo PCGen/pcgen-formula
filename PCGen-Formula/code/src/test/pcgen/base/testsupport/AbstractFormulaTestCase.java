@@ -47,7 +47,7 @@ import pcgen.base.util.FormatManager;
 public abstract class AbstractFormulaTestCase extends TestCase
 {
 
-	protected FormatManager<Number> numberManager = FormatUtilities.NUMBER_MANAGER;
+	protected final FormatManager<Number> numberManager = FormatUtilities.NUMBER_MANAGER;
 	protected FormatManager<String> stringManager = FormatUtilities.STRING_MANAGER;
 
 	private SplitFormulaSetup setup;
@@ -60,7 +60,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		setup = new SplitFormulaSetup();
 		setup.getLegalScopeLibrary()
 			.registerScope(new SimpleLegalScope(null, "Global"));
-		localSetup = new IndividualSetup(setup, "Global");
+		localSetup = new IndividualSetup(setup);
 		setup.getSolverFactory().addSolverFormat(Number.class, new Modifier(){
 
 			@Override
@@ -135,12 +135,11 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			}});
 	}
 
-	public void isValid(String formula, SimpleNode node,
-		FormatManager<?> formatManager, Class<?> assertedFormat)
+	protected void isValid(String formula, SimpleNode node)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		pcgen.base.formula.parse.FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
+			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
 		if (!semantics.isValid())
 		{
@@ -149,26 +148,25 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		}
 	}
 
-	public void isStatic(String formula, SimpleNode node, boolean b)
+	protected void isStatic(String formula, SimpleNode node, boolean b)
 	{
 		StaticVisitor staticVisitor =
 				new StaticVisitor(localSetup.getFormulaManager().getLibrary());
 		boolean isStat =
-				((Boolean) staticVisitor.visit(node, null)).booleanValue();
+				((Boolean) staticVisitor.visit(node)).booleanValue();
 		if (isStat != b)
 		{
 			TestCase.fail("Expected Static (" + b + ") Formula: " + formula);
 		}
 	}
 
-	public void evaluatesTo(String formula, SimpleNode node, Object valueOf)
+	protected void evaluatesTo(String formula, SimpleNode node, Object valueOf)
 	{
 		EvaluationManager manager = generateManager();
 		performEvaluation(formula, node, valueOf, manager);
 	}
 
-	public void performEvaluation(String formula, SimpleNode node,
-		Object valueOf, EvaluationManager manager)
+	protected static void performEvaluation(String formula, SimpleNode node, Object valueOf, EvaluationManager manager)
 	{
 		Object result = new EvaluateVisitor().visit(node, manager);
 		if (result.equals(valueOf))
@@ -197,18 +195,17 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			+ result.getClass().getSimpleName() + ")");
 	}
 
-	public EvaluationManager generateManager()
+	protected EvaluationManager generateManager()
 	{
 		return EvaluationManager.generate(localSetup.getFormulaManager(),
 			localSetup.getGlobalScopeInst(), Number.class);
 	}
 
-	protected void isNotValid(String formula, SimpleNode node,
-		FormatManager<?> formatManager, Class<?> assertedFormat)
+	protected void isNotValid(String formula, SimpleNode node)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		pcgen.base.formula.parse.FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
+			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
 		if (semantics.isValid())
 		{

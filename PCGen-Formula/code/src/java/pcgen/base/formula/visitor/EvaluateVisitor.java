@@ -77,7 +77,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * visited, which - through double dispatch - will result in another method
 	 * on this EvaluateVisitor being called.
 	 * 
-	 * {@inheritDoc}
+	 *
 	 */
 	@Override
 	public Object visit(SimpleNode node, Object data)
@@ -182,8 +182,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Returns the contents of the node, which is a numeric value.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		String nodeText = node.getText();
 		try
@@ -208,7 +207,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	public Object visit(ASTPCGenLookup node, Object data)
 	{
 		EvaluationManager manager = (EvaluationManager) data;
-		ASTPCGenSingleWord fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
+		SimpleNode fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
 		String name = fnode.getText();
 		Node argNode = node.jjtGetChild(1);
 		Node[] args = VisitorUtilities.accumulateArguments(argNode);
@@ -222,7 +221,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 		else if (argNode instanceof ASTPCGenBracket)
 		{
 			int index = (Integer) visit((SimpleNode) args[0], data);
-			return Array.get(visitVariable(name, manager), index);
+			return Array.get(EvaluateVisitor.visitVariable(name, manager), index);
 		}
 		throw new IllegalStateException("Invalid Formula (unrecognized node: "
 			+ argNode + ")");
@@ -234,8 +233,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * VariableID and then fetch the value for that VariableID from the
 	 * VariableStore (cache).
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		return visitVariable(node.getText(), (EvaluationManager) data);
 	}
@@ -247,8 +245,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -262,8 +259,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTFParen node, Object data)
+	public static Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -273,8 +269,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Evaluates a Quoted String (so obviously returns a String).
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		//The quotes are stripped by the parser
 		return node.getText();
@@ -331,7 +326,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 *            The EvaluationManager used in evaluation
 	 * @return The result of the evaluation on the child of the given node
 	 */
-	private Object evaluateSingleChild(SimpleNode node, Object data)
+	private Object evaluateSingleChild(Node node, Object data)
 	{
 		return node.jjtGetChild(0).jjtAccept(this, data);
 	}
@@ -365,7 +360,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 *            The EvaluationManager used in evaluation
 	 * @return the value for the given specific variable
 	 */
-	public Object visitVariable(String varName, EvaluationManager manager)
+	private static Object visitVariable(String varName, EvaluationManager manager)
 	{
 		FormulaManager fm = manager.peek(EvaluationManager.FMANAGER);
 		VariableLibrary varLibrary = fm.getFactory();

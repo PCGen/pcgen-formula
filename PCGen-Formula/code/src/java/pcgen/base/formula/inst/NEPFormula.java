@@ -29,7 +29,7 @@ import pcgen.base.util.FormatManager;
  * @param <T>
  *            The Class of object returned by this NEPFormula
  */
-public interface NEPFormula<T>
+interface NEPFormula<T>
 {
 
 	/**

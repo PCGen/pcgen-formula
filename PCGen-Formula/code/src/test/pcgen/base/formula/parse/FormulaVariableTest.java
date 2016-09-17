@@ -64,7 +64,7 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 		String formula = "a";
 		store.put(getVariable(formula), 5);
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -83,7 +83,7 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 		String formula = "a";
 		store.put(getVariable(formula), -7);
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -102,7 +102,7 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 		String formula = "a";
 		store.put(getVariable(formula), -7.3);
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -118,11 +118,11 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testAddVariableVariable()
 	{
-		String formula = "a+b";
 		store.put(getVariable("a"), 3);
 		store.put(getVariable("b"), 7);
+		String formula = "a+b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -135,11 +135,11 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testAddVariableVariableDouble()
 	{
-		String formula = "a+b";
 		store.put(getVariable("a"), 3.2);
 		store.put(getVariable("b"), -7.9);
+		String formula = "a+b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -152,12 +152,12 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testAddMultiple()
 	{
-		String formula = "a+b+c";
 		store.put(getVariable("a"), 3.2);
 		store.put(getVariable("b"), -7.9);
 		store.put(getVariable("c"), 2.2);
+		String formula = "a+b+c";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABCVars(formula, node);
 		//Note integer math
@@ -170,10 +170,10 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testSubtractInteger()
 	{
-		String formula = "a-3";
 		store.put(getVariable("a"), 3.2);
+		String formula = "a-3";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -181,7 +181,7 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 		assertEquals("a", var0.getName());
 		assertEquals(getGlobalScopeInst(), var0.getScope());
 		//Note integer math
-		evaluatesTo(formula, node, Double.valueOf(.2));
+		evaluatesTo(formula, node, Double.valueOf(0.2));
 		Object rv =
 				new ReconstructionVisitor().visit(node, new StringBuilder());
 		assertTrue(rv.toString().equals(formula));
@@ -190,11 +190,11 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testSubtractVariableVariable()
 	{
-		String formula = "a-b";
 		store.put(getVariable("a"), 3.2);
 		store.put(getVariable("b"), 2.1);
+		String formula = "a-b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -207,11 +207,11 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testEqualVariableDifferentVariable()
 	{
-		String formula = "a==b";
 		store.put(getVariable("a"), 3.2);
 		store.put(getVariable("b"), 2.1);
+		String formula = "a==b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, booleanManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -224,22 +224,22 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testEqualVariableDifferentType()
 	{
-		String formula = "a==b";
 		store.put(getVariable("a"), 3.2);
 		getVariableStore().put(getBooleanVariable("b"), false);
+		String formula = "a==b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
-		isNotValid(formula, node, booleanManager, null);
+		isNotValid(formula, node);
+		isNotValid(formula, node);
 	}
 
 	@Test
 	public void testEqualZeroVariableZeroVariable()
 	{
-		String formula = "a==b";
 		store.put(getVariable("a"), 0.0);
 		store.put(getVariable("b"), 0);
+		String formula = "a==b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, booleanManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -252,11 +252,11 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testEqualVariableEqualVariable()
 	{
-		String formula = "a==b";
 		store.put(getVariable("a"), -2.1);
 		store.put(getVariable("b"), -2.1);
+		String formula = "a==b";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, booleanManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABVars(formula, node);
 		//Note integer math
@@ -279,12 +279,12 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testParens()
 	{
-		String formula = "a*(b+c)";
 		store.put(getVariable("a"), 2);
 		store.put(getVariable("b"), 1.2);
-		store.put(getVariable("c"), -.3);
+		store.put(getVariable("c"), -0.3);
+		String formula = "a*(b+c)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABCVars(formula, node);
 		evaluatesTo(formula, node, Double.valueOf(1.8));
@@ -296,12 +296,12 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testExtraParens()
 	{
-		String formula = "((a/(((b-c)))))";
 		store.put(getVariable("a"), 3);
 		store.put(getVariable("b"), 1.2);
-		store.put(getVariable("c"), -.3);
+		store.put(getVariable("c"), -0.3);
+		String formula = "((a/(((b-c)))))";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		hasABCVars(formula, node);
 		evaluatesTo(formula, node, Double.valueOf(2));
@@ -389,10 +389,10 @@ public class FormulaVariableTest extends AbstractFormulaTestCase
 	@Test
 	public void testBooleanNegation()
 	{
-		String formula = "!a";
 		store.put(getBooleanVariable("a"), Boolean.FALSE);
+		String formula = "!a";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, booleanManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());

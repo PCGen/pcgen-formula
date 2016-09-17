@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.number;
 
+import pcgen.base.formula.base.UnaryAction;
+
 import junit.framework.TestCase;
 
 public class NumberMinusTest extends TestCase
@@ -27,7 +29,7 @@ public class NumberMinusTest extends TestCase
 	private static final Class<Double> DOUBLE_CLASS = Double.class;
 	private static final Class<Float> FLOAT_CLASS = Float.class;
 
-	private final NumberMinus op = new NumberMinus();
+	private final UnaryAction op = new NumberMinus();
 
 	public void testOperator()
 	{
@@ -80,7 +82,7 @@ public class NumberMinusTest extends TestCase
 			assertNull(op.evaluate(true));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

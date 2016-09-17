@@ -24,10 +24,9 @@ public class SimpleNode implements Node
 {
 	private Node parent;
 	private Node[] children;
-	private int id;
-	private FormulaParser parser;
+	private final int id;
 
-	public SimpleNode(int i)
+	private SimpleNode(int i)
 	{
 		id = i;
 	}
@@ -35,27 +34,31 @@ public class SimpleNode implements Node
 	public SimpleNode(FormulaParser p, int i)
 	{
 		this(i);
-		parser = p;
 	}
 
+	@Override
 	public void jjtOpen()
 	{
 	}
 
+	@Override
 	public void jjtClose()
 	{
 	}
 
+	@Override
 	public void jjtSetParent(Node n)
 	{
 		parent = n;
 	}
 
+	@Override
 	public Node jjtGetParent()
 	{
 		return parent;
 	}
 
+	@Override
 	public void jjtAddChild(Node n, int i)
 	{
 		if (children == null)
@@ -71,16 +74,19 @@ public class SimpleNode implements Node
 		children[i] = n;
 	}
 
+	@Override
 	public Node jjtGetChild(int i)
 	{
 		return children[i];
 	}
 
+	@Override
 	public int jjtGetNumChildren()
 	{
 		return (children == null) ? 0 : children.length;
 	}
 
+	@Override
 	public Object jjtAccept(FormulaParserVisitor visitor, Object data)
 	{
 		return visitor.visit(this, data);

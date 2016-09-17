@@ -17,6 +17,9 @@
  */
 package pcgen.base.formula.inst;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import pcgen.base.formula.base.Function;
 import pcgen.base.formula.base.FunctionLibrary;
 import pcgen.base.util.CaseInsensitiveMap;
@@ -39,8 +42,7 @@ public class SimpleFunctionLibrary implements FunctionLibrary
 	 * 
 	 * These are () functions for world-wide clarity :D
 	 */
-	private final CaseInsensitiveMap<Function> parenMap =
-			new CaseInsensitiveMap<Function>();
+	private final Map parenMap = new CaseInsensitiveMap<>();
 
 	/**
 	 * Adds a "paren" function to the SimpleFunctionLibrary.

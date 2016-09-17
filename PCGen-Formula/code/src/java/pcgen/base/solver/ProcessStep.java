@@ -29,7 +29,7 @@ package pcgen.base.solver;
  *            The format that this ProcessStep represents (the Class being acted
  *            upon in the Solver)
  */
-public class ProcessStep<T>
+class ProcessStep<T>
 {
 
 	/**
@@ -61,7 +61,7 @@ public class ProcessStep<T>
 	 * @param result
 	 *            The resulting value after the given Modifier was applied
 	 */
-	public ProcessStep(Modifier<T> modifier, Object source, T result)
+	ProcessStep(Modifier<T> modifier, Object source, T result)
 	{
 		this.modifier = modifier;
 		this.source = source;

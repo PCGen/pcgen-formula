@@ -30,6 +30,7 @@ import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VariableID;
 import pcgen.base.formula.base.VariableStore;
 import pcgen.base.formula.base.WriteableVariableStore;
+import pcgen.base.graph.base.Graph;
 import pcgen.base.graph.inst.DefaultDirectionalGraphEdge;
 import pcgen.base.graph.inst.DirectionalSetMapGraph;
 import pcgen.base.util.FormatManager;
@@ -45,7 +46,7 @@ import pcgen.base.util.FormatManager;
  * the AggressiveSolverManager will build and manage the associated Solver for
  * that VariableID.
  */
-public class AggressiveSolverManager
+class AggressiveSolverManager
 {
 
 	/**
@@ -58,8 +59,7 @@ public class AggressiveSolverManager
 	 * The relationship from each VariableID to the Solver calculating the value
 	 * of the VariableID.
 	 */
-	private final Map<VariableID<?>, Solver<?>> scopedChannels =
-			new HashMap<VariableID<?>, Solver<?>>();
+	private final Map<VariableID<?>, Solver<?>> scopedChannels = new HashMap<>();
 
 	/**
 	 * The "summarized" results of the calculation of each Solver.
@@ -72,7 +72,7 @@ public class AggressiveSolverManager
 	 * this implicitly stores the dependencies between the Solvers that are part
 	 * of this AggressiveSolverManager.
 	 */
-	private final DirectionalSetMapGraph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>> graph =
+	private final Graph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>> graph =
 			new DirectionalSetMapGraph<>();
 
 	/**
@@ -105,7 +105,7 @@ public class AggressiveSolverManager
 	 * @throws IllegalArgumentException
 	 *             if any of the parameters is null
 	 */
-	public AggressiveSolverManager(FormulaManager manager,
+	AggressiveSolverManager(FormulaManager manager,
 		SolverFactory solverFactory, WriteableVariableStore resultStore)
 	{
 		if (manager == null)
@@ -231,8 +231,7 @@ public class AggressiveSolverManager
 			 * operations risk (2) Process can still write to cache knowing ID
 			 */
 			@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-			DefaultDirectionalGraphEdge<VariableID<?>> edge =
-					new DefaultDirectionalGraphEdge<VariableID<?>>(depID, varID);
+			DefaultDirectionalGraphEdge<VariableID<?>> edge = new DefaultDirectionalGraphEdge<>(depID, varID);
 			graph.addEdge(edge);
 		}
 		//Cast above effectively enforced here
@@ -370,7 +369,7 @@ public class AggressiveSolverManager
 	 *            The VariableID as a starting point for triggering Solvers to
 	 *            be processed
 	 */
-	public void solveFromNode(VariableID<?> varID)
+	private void solveFromNode(VariableID<?> varID)
 	{
 		boolean warning = varStack.contains(varID);
 		try
@@ -405,7 +404,7 @@ public class AggressiveSolverManager
 	 *            The VariableID for which the children will be used as a
 	 *            starting point for triggering Solvers to be processed
 	 */
-	public void solveChildren(VariableID<?> varID)
+	private void solveChildren(VariableID<?> varID)
 	{
 		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : graph
 			.getAdjacentEdges(varID))
@@ -417,7 +416,7 @@ public class AggressiveSolverManager
 		}
 	}
 
-	private Stack<VariableID<?>> varStack = new Stack<>();
+	private final Stack<VariableID<?>> varStack = new Stack<>();
 
 	/**
 	 * Processes a single Solver represented by the given VariableID. Returns

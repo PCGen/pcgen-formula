@@ -33,7 +33,7 @@ import pcgen.base.testsupport.AbstractFormulaTestCase;
 public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 {
 	private AggressiveSolverManager manager;
-	private SolverFactory solverFactory = new SolverFactory();
+	private final SolverFactory solverFactory = new SolverFactory();
 	private VariableLibrary varLibrary;
 	private WriteableVariableStore store;
 	private LegalScope globalScope;
@@ -220,7 +220,6 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 	@Test
 	public void testComplex()
 	{
-		Object source = new Object();
 		ComplexNEPFormula formula = new ComplexNEPFormula("arms+legs");
 		Modifier<Number> formulaMod = AbstractModifier.add(formula, 100);
 		varLibrary.assertLegalVariableID("Limbs", globalScope, numberManager);
@@ -230,6 +229,7 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 				(VariableID<Number>) varLibrary.getVariableID(globalScopeInst,
 					"Limbs");
 		assertEquals(null, store.get(limbs));
+		Object source = new Object();
 		manager.addModifier(limbs, formulaMod, source);
 		assertEquals(0, store.get(limbs));
 
@@ -261,7 +261,6 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 	@Test
 	public void testChained()
 	{
-		Object source = new Object();
 		ComplexNEPFormula formula = new ComplexNEPFormula("arms+legs");
 		Modifier<Number> limbsMod = AbstractModifier.add(formula, 100);
 
@@ -285,6 +284,7 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 				(VariableID<Number>) varLibrary.getVariableID(globalScopeInst,
 					"Legs");
 		assertEquals(null, store.get(limbs));
+		Object source = new Object();
 		manager.addModifier(limbs, limbsMod, source);
 
 
@@ -371,7 +371,6 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 	@Test
 	public void testCircular()
 	{
-		Object source = new Object();
 		ComplexNEPFormula formula = new ComplexNEPFormula("arms+legs");
 		Modifier<Number> limbsMod = AbstractModifier.add(formula, 100);
 
@@ -398,6 +397,7 @@ public class AggressiveSolverManagerTest extends AbstractFormulaTestCase
 				(VariableID<Number>) varLibrary.getVariableID(globalScopeInst,
 					"Legs");
 		assertEquals(null, store.get(limbs));
+		Object source = new Object();
 		manager.addModifier(limbs, limbsMod, source);
 
 		assertEquals(0, store.get(arms));

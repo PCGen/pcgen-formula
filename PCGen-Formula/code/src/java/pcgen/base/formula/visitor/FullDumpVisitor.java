@@ -47,163 +47,112 @@ import pcgen.base.formula.parse.SimpleNode;
  * This is intended as a debugging behavior.
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class FullDumpVisitor implements FormulaParserVisitor
+class FullDumpVisitor implements FormulaParserVisitor
 {
 
 	/**
 	 * An embedded ReconstructionVisitor used to reconstruct the formula, as the
 	 * reconstructed version is provided as part of the debugging output.
 	 */
-	private final ReconstructionVisitor reconVisitor =
+	private final FormulaParserVisitor reconVisitor =
 			new ReconstructionVisitor();
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(SimpleNode node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTRoot node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTLogical node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTEquality node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTRelational node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTArithmetic node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTGeometric node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTUnaryMinus node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTUnaryNot node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTExpon node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTParen node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTNum node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTPCGenLookup node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTPCGenBracket node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTFParen node, Object data)
 	{
 		return dump(node, data);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object visit(ASTQuotString node, Object data)
 	{
@@ -237,7 +186,7 @@ public class FullDumpVisitor implements FormulaParserVisitor
 		}
 		Object rvr = node.jjtAccept(reconVisitor, new StringBuilder(1000));
 		System.err.print(": ");
-		System.err.println(rvr.toString());
+		System.err.println(rvr);
 		int numChildren = node.jjtGetNumChildren();
 		for (int i = 0; i < numChildren; i++)
 		{

@@ -106,7 +106,7 @@ public class VariableID<T>
 			throw new IllegalArgumentException(
 				"Variable Name cannot start/end with whitespace");
 		}
-		if (varName.length() == 0)
+		if (varName.isEmpty())
 		{
 			throw new IllegalArgumentException("Variable Name cannot be empty");
 		}
@@ -158,21 +158,15 @@ public class VariableID<T>
 		return formatManager.getManagedClass();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int hashCode()
 	{
 		int prime = 31;
 		int result = prime + varName.hashCode();
-		result = prime * result + scope.hashCode();
+		result = (prime * result) + scope.hashCode();
 		return result;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -193,9 +187,6 @@ public class VariableID<T>
 			&& formatManager.equals(other.formatManager) && scope.equals(other.scope);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString()
 	{

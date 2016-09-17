@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.string;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class StringAddTest extends TestCase
@@ -26,7 +28,7 @@ public class StringAddTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<String> STRING_CLASS = String.class;
 
-	private final StringAdd op = new StringAdd();
+	private final OperatorAction op = new StringAdd();
 
 	public void testOperator()
 	{
@@ -112,7 +114,7 @@ public class StringAddTest extends TestCase
 			assertNull(op.evaluate("ABC", true));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -121,7 +123,7 @@ public class StringAddTest extends TestCase
 			assertNull(op.evaluate(new Object(), "DEF"));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

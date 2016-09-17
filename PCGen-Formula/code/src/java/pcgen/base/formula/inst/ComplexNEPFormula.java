@@ -23,6 +23,7 @@ import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.EvaluationManager;
 import pcgen.base.formula.base.FormulaSemantics;
 import pcgen.base.formula.parse.FormulaParser;
+import pcgen.base.formula.parse.FormulaParserVisitor;
 import pcgen.base.formula.parse.ParseException;
 import pcgen.base.formula.parse.SimpleNode;
 import pcgen.base.formula.visitor.DependencyVisitor;
@@ -49,10 +50,10 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	private static final SemanticsVisitor SEMANTICS_VISITOR =
 			new SemanticsVisitor();
 
-	private static final DependencyVisitor DEPENDENCY_VISITOR =
+	private static final FormulaParserVisitor DEPENDENCY_VISITOR =
 			new DependencyVisitor();
 
-	private static final ReconstructionVisitor RECONSTRUCTION_VISITOR =
+	private static final FormulaParserVisitor RECONSTRUCTION_VISITOR =
 			new ReconstructionVisitor();
 
 	private static final EvaluateVisitor EVALUATE_VISITOR =
@@ -131,7 +132,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	public T resolve(EvaluationManager manager)
 	{
 		@SuppressWarnings("unchecked")
-		T result = (T) EVALUATE_VISITOR.visit(root, manager);
+		T result = (T) ComplexNEPFormula.EVALUATE_VISITOR.visit(root, manager);
 		return result;
 	}
 
@@ -160,12 +161,9 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 			throw new IllegalArgumentException(
 				"Cannot get formula dependencies with null DependencyManager");
 		}
-		DEPENDENCY_VISITOR.visit(root, depManager);
+		ComplexNEPFormula.DEPENDENCY_VISITOR.visit(root, depManager);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void isValid(FormatManager<T> formatManager,
 		FormulaSemantics semantics)
@@ -173,7 +171,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 		//semantics.set(FormulaSemantics.BASE_FORMAT, expectedFormat);
 		@SuppressWarnings("PMD.PrematureDeclaration")
 		FormatManager<?> formulaFormat =
-				(FormatManager<?>) SEMANTICS_VISITOR.visit(root, semantics);
+				(FormatManager<?>) ComplexNEPFormula.SEMANTICS_VISITOR.visit(root, semantics);
 		if (!semantics.isValid())
 		{
 			return;
@@ -188,14 +186,11 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
-		RECONSTRUCTION_VISITOR.visit(root, sb);
+		CharSequence sb = new StringBuilder();
+		ComplexNEPFormula.RECONSTRUCTION_VISITOR.visit(root, sb);
 		return sb.toString();
 	}
 }

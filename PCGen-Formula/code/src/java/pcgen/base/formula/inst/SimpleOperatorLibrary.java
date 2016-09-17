@@ -25,6 +25,7 @@ import pcgen.base.formula.base.UnaryAction;
 import pcgen.base.formula.parse.Operator;
 import pcgen.base.util.FormatManager;
 import pcgen.base.util.HashMapToList;
+import pcgen.base.util.MapToList;
 
 /**
  * SimpleOperatorLibrary is a simple implementation of the OperatorLibrary
@@ -37,37 +38,26 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 	 * HashMapToList from the Operators to the available OperatorActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, OperatorAction> operatorMTL =
-			new HashMapToList<Operator, OperatorAction>();
+	private final MapToList<Operator, OperatorAction> operatorMTL = new HashMapToList<>();
 
 	/**
 	 * HashMapToList from the Operators to the available UnaryActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, UnaryAction> unaryMTL =
-			new HashMapToList<Operator, UnaryAction>();
+	private final MapToList<Operator, UnaryAction> unaryMTL = new HashMapToList<>();
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addAction(OperatorAction action)
 	{
 		operatorMTL.addToListFor(action.getOperator(), action);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void addAction(UnaryAction action)
 	{
 		unaryMTL.addToListFor(action.getOperator(), action);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object evaluate(Operator operator, Object o)
 	{
@@ -92,9 +82,6 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 				+ " cannot process " + o.getClass().getSimpleName());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public FormatManager<?> processAbstract(Operator operator, Class<?> format)
 	{
@@ -118,9 +105,6 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object evaluate(Operator operator, Object o1, Object o2)
 	{
@@ -147,9 +131,6 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 				+ o2.getClass().getSimpleName());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public FormatManager<?> processAbstract(Operator operator, Class<?> format1,
 		Class<?> format2)

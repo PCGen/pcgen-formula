@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.bool;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class BooleanAndTest extends TestCase
@@ -26,7 +28,7 @@ public class BooleanAndTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 
-	private final BooleanAnd op = new BooleanAnd();
+	private final OperatorAction op = new BooleanAnd();
 
 	public void testOperator()
 	{
@@ -112,7 +114,7 @@ public class BooleanAndTest extends TestCase
 			assertNull(op.evaluate(Boolean.FALSE, Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -121,7 +123,7 @@ public class BooleanAndTest extends TestCase
 			assertNull(op.evaluate(new Object(), Boolean.TRUE));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

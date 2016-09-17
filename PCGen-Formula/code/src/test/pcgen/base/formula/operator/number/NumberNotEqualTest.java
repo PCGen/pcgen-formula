@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.number;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class NumberNotEqualTest extends TestCase
@@ -27,7 +29,7 @@ public class NumberNotEqualTest extends TestCase
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 	private static final Class<Double> DOUBLE_CLASS = Double.class;
 
-	private final NumberNotEqual op = new NumberNotEqual();
+	private final OperatorAction op = new NumberNotEqual();
 
 	public void testOperator()
 	{
@@ -124,7 +126,7 @@ public class NumberNotEqualTest extends TestCase
 			assertNull(op.evaluate(true, Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -133,7 +135,7 @@ public class NumberNotEqualTest extends TestCase
 			assertNull(op.evaluate(new Object(), Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

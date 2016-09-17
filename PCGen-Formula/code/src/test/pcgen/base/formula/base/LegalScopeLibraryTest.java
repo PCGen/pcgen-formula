@@ -12,13 +12,14 @@ public class LegalScopeLibraryTest extends TestCase
 {
 
 	private LegalScopeLibrary library;
-	SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
-	SimpleLegalScope subScope = new SimpleLegalScope(globalScope, "SubScope");
-	SimpleLegalScope otherScope = new SimpleLegalScope(globalScope, "OtherScope");
+	private final SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
+	private final LegalScope subScope = new SimpleLegalScope(globalScope, "SubScope");
+	private final LegalScope otherScope = new SimpleLegalScope(globalScope, "OtherScope");
 
 	@Override
 	protected void setUp() throws Exception
 	{
+		super.setUp();
 		library = new LegalScopeLibrary();
 	}
 
@@ -30,13 +31,9 @@ public class LegalScopeLibraryTest extends TestCase
 			library.registerScope(null);
 			fail("null must be rejected in registerScope");
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalArgumentException | NullPointerException e)
 		{
 			//ok
-		}
-		catch (NullPointerException e)
-		{
-			//ok too
 		}
 	}
 
@@ -48,13 +45,9 @@ public class LegalScopeLibraryTest extends TestCase
 			library.registerScope(new BadLegalScope());
 			fail("null name must be rejected in registerScope");
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalArgumentException | NullPointerException e)
 		{
 			//ok
-		}
-		catch (NullPointerException e)
-		{
-			//ok too
 		}
 		library.registerScope(subScope);
 		try
@@ -78,13 +71,9 @@ public class LegalScopeLibraryTest extends TestCase
 			library.getChildScopes(null);
 			fail("null must be rejected in getChildScopes");
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalArgumentException | NullPointerException e)
 		{
 			//ok
-		}
-		catch (NullPointerException e)
-		{
-			//ok too
 		}
 	}
 

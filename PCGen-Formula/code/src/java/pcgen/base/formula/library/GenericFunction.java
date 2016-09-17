@@ -112,8 +112,7 @@ public class GenericFunction implements Function
 	public final FormatManager<?> allowArgs(SemanticsVisitor visitor,
 		Node[] args, FormulaSemantics semantics)
 	{
-		FormulaManager withArgs =
-				getManager(args, semantics.peek(FormulaSemantics.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, semantics.peek(FormulaSemantics.FMANAGER));
 		//Need to save original to handle "embedded" GenericFunction objects properly
 		semantics.push(ArgumentDependencyManager.KEY,
 			new ArgumentDependencyManager());
@@ -127,7 +126,7 @@ public class GenericFunction implements Function
 		int maxArg = myArgs.getMaximumArgument() + 1;
 		if (maxArg != args.length)
 		{
-			semantics.setInvalid("Function " + getFunctionName()
+			semantics.setInvalid("Function " + functionName
 				+ " required: " + maxArg + " arguments, but was provided "
 				+ args.length + " " + Arrays.asList(args));
 			return null;
@@ -148,8 +147,7 @@ public class GenericFunction implements Function
 	public Object evaluate(EvaluateVisitor visitor, Node[] args,
 		EvaluationManager manager)
 	{
-		FormulaManager withArgs =
-				getManager(args, manager.peek(EvaluationManager.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, manager.peek(EvaluationManager.FMANAGER));
 		manager.push(EvaluationManager.FMANAGER, withArgs);
 		Object result = visitor.visit(root, manager);
 		manager.pop(EvaluationManager.FMANAGER);
@@ -171,7 +169,7 @@ public class GenericFunction implements Function
 		FunctionLibrary argLibrary =
 				new ArgWrappingLibrary(visitor.getLibrary(), args);
 		StaticVisitor subVisitor = new StaticVisitor(argLibrary);
-		return (Boolean) subVisitor.visit(root, null);
+		return (Boolean) subVisitor.visit(root);
 	}
 
 	/**
@@ -194,14 +192,13 @@ public class GenericFunction implements Function
 	public void getDependencies(DependencyVisitor visitor,
 		DependencyManager manager, Node[] args)
 	{
-		FormulaManager withArgs =
-				getManager(args, manager.peek(DependencyManager.FMANAGER));
+		FormulaManager withArgs = GenericFunction.getManager(args, manager.peek(DependencyManager.FMANAGER));
 		manager.push(DependencyManager.FMANAGER, withArgs);
 		visitor.visit(root, manager);
 		manager.pop(DependencyManager.FMANAGER);
 	}
 
-	private FormulaManager getManager(Node[] args, FormulaManager formulaManager)
+	private static FormulaManager getManager(Node[] args, FormulaManager formulaManager)
 	{
 		FunctionLibrary argLibrary =
 				new ArgWrappingLibrary(formulaManager.getLibrary(), args);

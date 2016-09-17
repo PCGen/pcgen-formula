@@ -65,7 +65,7 @@ public class VariableLibrary
 	 * that variable.
 	 */
 	@SuppressWarnings("PMD.LooseCoupling")
-	private DoubleKeyMap<String, LegalScope, FormatManager<?>> variableDefs =
+	private final DoubleKeyMap<String, LegalScope, FormatManager<?>> variableDefs =
 			new DoubleKeyMap<>(CaseInsensitiveMap.class, HashMap.class);
 
 	/**
@@ -105,7 +105,7 @@ public class VariableLibrary
 		{
 			throw new IllegalArgumentException("LegalScope cannot be null");
 		}
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		if (!variableDefs.containsKey(varName))
 		{
 			//Can't be a conflict
@@ -272,7 +272,7 @@ public class VariableLibrary
 	 */
 	public Set<LegalScope> getKnownLegalScopes(String varName)
 	{
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		return variableDefs.getSecondaryKeySet(varName);
 	}
 
@@ -318,7 +318,7 @@ public class VariableLibrary
 				"Cannot get VariableID " + varName + " for "
 					+ messageScope.getLegalScope().getName() + " scope");
 		}
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		FormatManager<?> formatManager =
 				variableDefs.get(varName, scopeInst.getLegalScope());
 		if (formatManager != null)
@@ -332,13 +332,13 @@ public class VariableLibrary
 	/**
 	 * Ensure a name is not null, zero length, or whitespace padded.
 	 */
-	private void checkLegalVarName(String varName)
+	private static void checkLegalVarName(String varName)
 	{
 		if (varName == null)
 		{
 			throw new IllegalArgumentException("Variable Name cannot be null");
 		}
-		if (varName.length() == 0)
+		if (varName.isEmpty())
 		{
 			throw new IllegalArgumentException("Variable Name cannot be empty");
 		}

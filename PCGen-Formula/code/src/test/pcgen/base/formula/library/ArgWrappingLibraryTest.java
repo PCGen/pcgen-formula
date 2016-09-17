@@ -49,7 +49,7 @@ public class ArgWrappingLibraryTest extends AbstractFormulaTestCase
 		args = new Node[]{zero};
 		ASTNum onenode = new ASTNum(0);
 		onenode.setToken("1");
-		Node[] masterargs = new Node[]{onenode};
+		Node[] masterargs = {onenode};
 		library = new ArgWrappingLibrary(underlying, masterargs);
 	}
 
@@ -61,13 +61,9 @@ public class ArgWrappingLibraryTest extends AbstractFormulaTestCase
 			library.addFunction(null);
 			fail("Expected null function to be rejected");
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalArgumentException | UnsupportedOperationException e)
 		{
 			//Yep
-		}
-		catch (UnsupportedOperationException e)
-		{
-			//Yep, works, too
 		}
 	}
 
@@ -109,7 +105,7 @@ public class ArgWrappingLibraryTest extends AbstractFormulaTestCase
 		assertEquals(1, library.getFunction("arg").evaluate(visitor, args, null));
 	}
 
-	private Function getPseudoFunction(final String name)
+	private static Function getPseudoFunction(final String name)
 	{
 		return new Function()
 		{

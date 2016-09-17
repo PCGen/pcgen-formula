@@ -47,40 +47,37 @@ public class FormulaSemantics extends MappedDeque
 	 * A TypedKey used for storing the FormulaManager contained in this
 	 * FormulaSemantics.
 	 */
-	public static final TypedKey<FormulaManager> FMANAGER =
-			new TypedKey<FormulaManager>();
+	public static final TypedKey<FormulaManager> FMANAGER = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the LegalScope contained in this
 	 * FormulaSemantics.
 	 */
-	public static final TypedKey<LegalScope> SCOPE = new TypedKey<LegalScope>();
+	public static final TypedKey<LegalScope> SCOPE = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the Format currently asserted for the formula
 	 * served by this FormulaSemantics.
 	 */
-	public static final TypedKey<Class<?>> ASSERTED = new TypedKey<Class<?>>();
+	public static final TypedKey<Class<?>> ASSERTED = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the Format of the input object for the
 	 * formula served by this FormulaSemantics.
 	 */
-	public static final TypedKey<FormatManager<?>> INPUT_FORMAT =
-			new TypedKey<FormatManager<?>>();
+	public static final TypedKey<FormatManager<?>> INPUT_FORMAT = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing if the formula served by this
 	 * FormulaSemantics is valid.
 	 */
-	private static final TypedKey<Boolean> VALID = new TypedKey<Boolean>(
-		Boolean.TRUE);
+	private static final TypedKey<Boolean> VALID = new TypedKey<>(Boolean.TRUE);
 
 	/**
 	 * A TypedKey used for storing a message indicating why the formula served
 	 * by this FormulaSemantics is not valid.
 	 */
-	private static final TypedKey<String> REPORT = new TypedKey<String>();
+	private static final TypedKey<String> REPORT = new TypedKey<>();
 
 	/**
 	 * Sets the FormulaSemantics to indicate a Formula is not valid, and
@@ -91,8 +88,8 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public void setInvalid(String text)
 	{
-		set(VALID, false);
-		set(REPORT, text);
+		set(FormulaSemantics.VALID, false);
+		set(FormulaSemantics.REPORT, text);
 	}
 
 	/**
@@ -104,7 +101,7 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public String getReport()
 	{
-		return peek(REPORT);
+		return peek(FormulaSemantics.REPORT);
 	}
 
 	/**
@@ -114,7 +111,7 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public boolean isValid()
 	{
-		return peek(VALID);
+		return peek(FormulaSemantics.VALID);
 	}
 
 	/**
@@ -127,19 +124,15 @@ public class FormulaSemantics extends MappedDeque
 	 * @param legalScope
 	 *            The LegalScope when a Formula is processed with this
 	 *            FormulaSemantics
-	 * @param assertedFormat
-	 *            The asserted Format when a Formula is processed with this
-	 *            FormulaSemantics (may be null)
 	 * @return An initialized FormulaSemantics object with the appropriate keys
 	 *         set to the given parameters
 	 */
-	public static FormulaSemantics generate(FormulaManager manager,
-		LegalScope legalScope, Class<?> assertedFormat)
+	public static FormulaSemantics generate(FormulaManager manager, LegalScope legalScope)
 	{
 		FormulaSemantics semantics = new FormulaSemantics();
 		semantics.set(FMANAGER, manager);
 		semantics.set(SCOPE, legalScope);
-		semantics.set(ASSERTED, assertedFormat);
+		semantics.set(ASSERTED, null);
 		return semantics;
 	}
 }

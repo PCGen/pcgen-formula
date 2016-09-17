@@ -64,24 +64,18 @@ public class ArgFunction implements Function
 		this.masterArgs = masterArgs;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getFunctionName()
 	{
-		return FUNCTION_NAME;
+		return ArgFunction.FUNCTION_NAME;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Boolean isStatic(StaticVisitor visitor, Node[] args)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
-		return (Boolean) visitor.visit((SimpleNode) masterArgs[argNum], null);
+		return (Boolean) visitor.visit((SimpleNode) masterArgs[argNum]);
 	}
 
 	/**
@@ -97,7 +91,7 @@ public class ArgFunction implements Function
 	{
 		if (args.length != 1)
 		{
-			semantics.setInvalid("Function " + FUNCTION_NAME
+			semantics.setInvalid("Function " + ArgFunction.FUNCTION_NAME
 				+ " received incorrect # of arguments, expected: 0 got "
 				+ args.length + " " + Arrays.asList(args));
 			return null;
@@ -105,7 +99,7 @@ public class ArgFunction implements Function
 		Node node = args[0];
 		if (!(node instanceof ASTNum))
 		{
-			semantics.setInvalid("Parse Error: Function " + FUNCTION_NAME
+			semantics.setInvalid("Parse Error: Function " + ArgFunction.FUNCTION_NAME
 				+ " received invalid argument format,"
 				+ " expected: ASTNum got " + node.getClass().getName() + ": "
 				+ node);
@@ -117,13 +111,13 @@ public class ArgFunction implements Function
 			int argNum = Integer.parseInt(nodeText);
 			if ((argNum < 0) || (argNum >= masterArgs.length))
 			{
-				semantics.setInvalid("Function " + FUNCTION_NAME
+				semantics.setInvalid("Function " + ArgFunction.FUNCTION_NAME
 					+ " received incorrect # of arguments, expected: "
 					+ (argNum + 1) + " got " + masterArgs.length + " "
 					+ Arrays.asList(masterArgs));
 				return null;
 			}
-			assertArgs(semantics, argNum);
+			ArgFunction.assertArgs(semantics, argNum);
 			Node n = masterArgs[argNum];
 			return (FormatManager<?>) n.jjtAccept(visitor, semantics);
 		}
@@ -136,7 +130,7 @@ public class ArgFunction implements Function
 		}
 	}
 
-	private void assertArgs(FormulaSemantics semantics, int argNum)
+	private static void assertArgs(FormulaSemantics semantics, int argNum)
 	{
 		ArgumentDependencyManager argManager =
 				semantics.peek(ArgumentDependencyManager.KEY);
@@ -148,14 +142,11 @@ public class ArgFunction implements Function
 		argManager.addArgument(argNum);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object evaluate(EvaluateVisitor visitor, Node[] args,
 		EvaluationManager manager)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
 		return visitor.visit((SimpleNode) masterArgs[argNum], manager);
 	}
@@ -171,7 +162,7 @@ public class ArgFunction implements Function
 	public void getDependencies(DependencyVisitor visitor,
 		DependencyManager manager, Node[] args)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
 		ArgumentDependencyManager argManager =
 				manager.peek(ArgumentDependencyManager.KEY);

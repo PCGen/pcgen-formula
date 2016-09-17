@@ -53,7 +53,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 		five.setToken("5");
 		String formula = "abs(-4.5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		Node[] array = new Node[]{four, five, node};
+		Node[] array = {four, five, node};
 		FunctionLibrary functionLibrary = getFunctionLibrary();
 		functionLibrary.addFunction(new ArgFunction(array));
 		functionLibrary.addFunction(new AbsFunction());
@@ -80,10 +80,10 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg()";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 		formula = "arg(2, 3)";
 		node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "4";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, true);
 		varCapture.visit(node, null);
 		assertEquals(-1, argManager.getMaximumArgument());
@@ -106,7 +106,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(4)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(-1)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(1.5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(\"string\")";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node);
 	}
 
 	@Test
@@ -138,7 +138,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(0)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, true);
 		varCapture.visit(node, depManager);
 		assertEquals(0, argManager.getMaximumArgument());
@@ -153,7 +153,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(1)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, true);
 		varCapture.visit(node, depManager);
 		assertEquals(1, argManager.getMaximumArgument());
@@ -168,8 +168,8 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 		 * Safe and "ignored" - if this test fails, need to change what FDM is
 		 * passed in - it should NOT contain an ArgumentDependencyManager
 		 */
-		assertTrue(null == fdm.peek(ArgumentDependencyManager.KEY));
-		DependencyVisitor dv = new DependencyVisitor();
+		assertTrue(fdm.peek(ArgumentDependencyManager.KEY) == null);
+		pcgen.base.formula.parse.FormulaParserVisitor dv = new DependencyVisitor();
 		dv.visit(node, fdm);
 	}
 
@@ -178,7 +178,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "arg(2)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node);
 		isStatic(formula, node, true);
 		varCapture.visit(node, depManager);
 		assertEquals(2, argManager.getMaximumArgument());

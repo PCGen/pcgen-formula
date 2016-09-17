@@ -55,23 +55,23 @@ public class ArrayComponentModifierTest extends TestCase
 	public void testGetUserPriority()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
-		assertEquals((100l << 32), acm.getPriority());
+		Modifier acm = new ArrayComponentModifier(5, cm);
+		assertEquals((100L << 32), acm.getPriority());
 	}
 
 	@Test
 	public void testGetVariableFormat()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
-		assertEquals(new Number[]{}.getClass(), acm.getVariableFormat());
+		Modifier acm = new ArrayComponentModifier(5, cm);
+		assertEquals(Number[].class, acm.getVariableFormat());
 	}
 
 	@Test
 	public void testGetIdentification()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
+		Modifier acm = new ArrayComponentModifier(5, cm);
 		assertEquals("Set (component)", acm.getIdentification());
 	}
 
@@ -87,10 +87,10 @@ public class ArrayComponentModifierTest extends TestCase
 	public void testProcess()
 	{
 		Modifier cm = AbstractModifier.setNumber(6, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
-		Number[] array = new Number[]{1, 2, 3, 4, 5, 6, 7};
+		Number[] array = {1, 2, 3, 4, 5, 6, 7};
 		EvaluationManager manager = new EvaluationManager();
 		manager.set(EvaluationManager.INPUT, array);
+		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
 		Object[] result = acm.process(manager);
 		assertFalse(array == result);
 		array[5] = 6;
@@ -102,11 +102,11 @@ public class ArrayComponentModifierTest extends TestCase
 	public void testProcessOutOfBounds()
 	{
 		Modifier cm = AbstractModifier.setNumber(77, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
-		Number[] array = new Number[]{1, 2, 3, 4};
+		Number[] array = {1, 2, 3, 4};
 		//Should be no effect
 		EvaluationManager manager = new EvaluationManager();
 		manager.set(EvaluationManager.INPUT, array);
+		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
 		Object[] result = acm.process(manager);
 		assertTrue(Arrays.deepEquals(array, result));
 	}

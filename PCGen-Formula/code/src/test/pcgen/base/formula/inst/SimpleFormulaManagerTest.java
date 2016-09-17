@@ -27,7 +27,6 @@ import pcgen.base.solver.SolverFactory;
 public class SimpleFormulaManagerTest extends TestCase
 {
 
-	private LegalScopeLibrary scopeLibrary;
 	private VariableLibrary varLibrary;
 	private SimpleFunctionLibrary ftnLibrary;
 	private SimpleOperatorLibrary opLibrary;
@@ -38,7 +37,7 @@ public class SimpleFormulaManagerTest extends TestCase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		scopeLibrary = new LegalScopeLibrary();
+		LegalScopeLibrary scopeLibrary = new LegalScopeLibrary();
 		varLibrary = new VariableLibrary(scopeLibrary);
 		opLibrary = new SimpleOperatorLibrary();
 		ftnLibrary = new SimpleFunctionLibrary();
@@ -54,13 +53,9 @@ public class SimpleFormulaManagerTest extends TestCase
 			new SimpleFormulaManager(null, null, null, null, null);
 			fail("nulls must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 		try
 		{
@@ -68,13 +63,9 @@ public class SimpleFormulaManagerTest extends TestCase
 				defaultStore);
 			fail("null ftn lib must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 		try
 		{
@@ -82,13 +73,9 @@ public class SimpleFormulaManagerTest extends TestCase
 				defaultStore);
 			fail("null op lib must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 		try
 		{
@@ -96,13 +83,9 @@ public class SimpleFormulaManagerTest extends TestCase
 				defaultStore);
 			fail("null var lib must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 		try
 		{
@@ -110,13 +93,9 @@ public class SimpleFormulaManagerTest extends TestCase
 				defaultStore);
 			fail("null results must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 		try
 		{
@@ -124,13 +103,9 @@ public class SimpleFormulaManagerTest extends TestCase
 				resultsStore, null);
 			fail("null defaults must be rejected");
 		}
-		catch (NullPointerException e)
+		catch (NullPointerException | IllegalArgumentException e)
 		{
 			//ok
-		}
-		catch (IllegalArgumentException e)
-		{
-			//ok, too			
 		}
 	}
 

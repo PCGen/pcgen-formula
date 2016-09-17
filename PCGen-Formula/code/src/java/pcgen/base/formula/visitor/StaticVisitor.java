@@ -116,10 +116,9 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * visited, which - through double dispatch - will result in another method
 	 * on this StaticVisitor being called.
 	 * 
-	 * {@inheritDoc}
+	 *
 	 */
-	@Override
-	public Object visit(SimpleNode node, Object data)
+	public Object visit(Node node)
 	{
 		//Delegate to the appropriate class
 		return node.jjtAccept(this, null);
@@ -230,8 +229,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	/**
 	 * Numbers are always static. :)
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		return Boolean.TRUE;
 	}
@@ -246,7 +244,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	@Override
 	public Object visit(ASTPCGenLookup node, Object data)
 	{
-		ASTPCGenSingleWord fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
+		SimpleNode fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
 		Node argNode = node.jjtGetChild(1);
 		if (argNode instanceof ASTFParen)
 		{
@@ -269,8 +267,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	/**
 	 * Variables are always NOT static. :(
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		return Boolean.FALSE;
 	}
@@ -282,8 +279,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * error in the implementation of the formula or a tree structure problem in
 	 * the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -348,7 +344,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 *            determine if it is static
 	 * @return TRUE if the first child of this node is static; FALSE otherwise
 	 */
-	private Object singleChildStatic(SimpleNode node)
+	private Object singleChildStatic(Node node)
 	{
 		return node.jjtGetChild(0).jjtAccept(this, null);
 	}

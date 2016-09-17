@@ -23,7 +23,7 @@ import pcgen.base.formula.parse.Node;
  * VisitorUtilities are a set of common behaviors used among a number of
  * visitors to do processing of a formula.
  */
-public final class VisitorUtilities
+final class VisitorUtilities
 {
 
 	/**

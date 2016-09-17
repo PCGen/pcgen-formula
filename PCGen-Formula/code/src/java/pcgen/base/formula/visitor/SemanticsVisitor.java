@@ -97,7 +97,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * visited, which - through double dispatch - will result in another method
 	 * on this SemanticsVisitor being called.
 	 * 
-	 * {@inheritDoc}
+	 *
 	 */
 	@Override
 	public Object visit(SimpleNode node, Object data)
@@ -210,8 +210,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Processes a numeric node. This ensures that the node has no children and
 	 * that it can be parsed as a numeric value.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -247,7 +246,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		//Two children are function name and the grouping (parens/brackets)
 		if (node.jjtGetNumChildren() != 2)
 		{
-			semantics.setInvalid(getInvalidCountReport(node, 2));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 2));
 			return null;
 		}
 		Node firstChild = node.jjtGetChild(0);
@@ -265,7 +264,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		 * Validate the function contents (remember it can have other complex
 		 * structures inside of it)
 		 */
-		ASTPCGenSingleWord ftnNode = (ASTPCGenSingleWord) firstChild;
+		SimpleNode ftnNode = (ASTPCGenSingleWord) firstChild;
 		String name = ftnNode.getText();
 		Node argNode = node.jjtGetChild(1);
 		if (argNode instanceof ASTFParen)
@@ -309,7 +308,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 				+ " must resolve to a number");
 			return null;
 		}
-		FormatManager<?> formatManager = getVariableFormat(semantics, name);
+		FormatManager<?> formatManager = SemanticsVisitor.getVariableFormat(semantics, name);
 		if (formatManager == null)
 		{
 			semantics.setInvalid("Variable: " + name
@@ -333,8 +332,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * VariableIDFactory that the variable usage is valid within the scope
 	 * recognized by this SemanticsVisitor.
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -366,8 +364,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * @return The format for the given Variable, in the scope as described by
 	 *         the FormulaSemantics
 	 */
-	public FormatManager<?> getVariableFormat(FormulaSemantics semantics,
-		String varName)
+	private static FormatManager<?> getVariableFormat(FormulaSemantics semantics, String varName)
 	{
 		VariableLibrary varLib =
 				semantics.peek(FormulaSemantics.FMANAGER).getFactory();
@@ -447,7 +444,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		}
 		if (node.jjtGetNumChildren() != 2)
 		{
-			semantics.setInvalid(getInvalidCountReport(node, 2));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 2));
 			return null;
 		}
 		Node child1 = node.jjtGetChild(0);
@@ -534,7 +531,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 		if (node.jjtGetNumChildren() != 1)
 		{
 			FormulaSemantics semantics = (FormulaSemantics) data;
-			semantics.setInvalid(getInvalidCountReport(node, 1));
+			semantics.setInvalid(SemanticsVisitor.getInvalidCountReport(node, 1));
 			return null;
 		}
 		Node child = node.jjtGetChild(0);
@@ -545,7 +542,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Generates an invalid argument count report based on the given node and
 	 * expected argument count.
 	 */
-	private String getInvalidCountReport(SimpleNode node, int expectedCount)
+	private static String getInvalidCountReport(Node node, int expectedCount)
 	{
 		int argLength = node.jjtGetNumChildren();
 		Node[] args = new Node[argLength];

@@ -17,8 +17,9 @@
  */
 package pcgen.base.formula.operator.generic;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
-import pcgen.base.formula.operator.generic.GenericNotEqual;
 
 public class GenericNotEqualTest extends TestCase
 {
@@ -27,7 +28,7 @@ public class GenericNotEqualTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 
-	private final GenericNotEqual op = new GenericNotEqual();
+	private final OperatorAction op = new GenericNotEqual();
 
 	public void testOperator()
 	{
@@ -116,7 +117,7 @@ public class GenericNotEqualTest extends TestCase
 				fail("Unequal types cannot be equal");
 			}
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -128,7 +129,7 @@ public class GenericNotEqualTest extends TestCase
 				fail("Unequal types cannot be equal");
 			}
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

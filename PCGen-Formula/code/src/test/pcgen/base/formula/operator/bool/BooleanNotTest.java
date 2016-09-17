@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.bool;
 
+import pcgen.base.formula.base.UnaryAction;
+
 import junit.framework.TestCase;
 
 public class BooleanNotTest extends TestCase
@@ -26,7 +28,7 @@ public class BooleanNotTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 
-	private final BooleanNot op = new BooleanNot();
+	private final UnaryAction op = new BooleanNot();
 
 	public void testOperator()
 	{
@@ -77,7 +79,7 @@ public class BooleanNotTest extends TestCase
 			assertNull(op.evaluate(Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -86,7 +88,7 @@ public class BooleanNotTest extends TestCase
 			assertNull(op.evaluate(new Object()));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

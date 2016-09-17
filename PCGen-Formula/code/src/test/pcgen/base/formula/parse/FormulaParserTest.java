@@ -26,7 +26,7 @@ import org.junit.Test;
 public class FormulaParserTest extends TestCase
 {
 
-	private SimpleNode doTest(String formula) throws ParseException
+	private static SimpleNode doTest(String formula)
 	{
 		return new FormulaParser(new StringReader(formula)).query();
 	}
