@@ -84,6 +84,6 @@ public class SimpleLegalScope implements LegalScope
 	@Override
 	public String toString()
 	{
-		return getName();
+		return name;
 	}
 }
