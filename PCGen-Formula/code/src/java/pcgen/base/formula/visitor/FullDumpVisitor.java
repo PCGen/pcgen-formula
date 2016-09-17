@@ -47,7 +47,7 @@ import pcgen.base.formula.parse.SimpleNode;
  * This is intended as a debugging behavior.
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class FullDumpVisitor implements FormulaParserVisitor
+class FullDumpVisitor implements FormulaParserVisitor
 {
 
 	/**

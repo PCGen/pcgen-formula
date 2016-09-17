@@ -143,7 +143,7 @@ public class ScopeInstanceFactoryTest extends TestCase
 		private final String scopeName;
 		private final VarScoped parent;
 
-		public Scoped(String s, String scopeName, VarScoped parent)
+		private Scoped(String s, String scopeName, VarScoped parent)
 		{
 			name = s;
 			this.scopeName = scopeName;

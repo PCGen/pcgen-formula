@@ -135,7 +135,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			}});
 	}
 
-	public void isValid(String formula, SimpleNode node)
+	protected void isValid(String formula, SimpleNode node)
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
@@ -148,7 +148,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		}
 	}
 
-	public void isStatic(String formula, SimpleNode node, boolean b)
+	protected void isStatic(String formula, SimpleNode node, boolean b)
 	{
 		StaticVisitor staticVisitor =
 				new StaticVisitor(localSetup.getFormulaManager().getLibrary());
@@ -160,13 +160,13 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		}
 	}
 
-	public void evaluatesTo(String formula, SimpleNode node, Object valueOf)
+	protected void evaluatesTo(String formula, SimpleNode node, Object valueOf)
 	{
 		EvaluationManager manager = generateManager();
 		performEvaluation(formula, node, valueOf, manager);
 	}
 
-	public static void performEvaluation(String formula, SimpleNode node, Object valueOf, EvaluationManager manager)
+	protected static void performEvaluation(String formula, SimpleNode node, Object valueOf, EvaluationManager manager)
 	{
 		Object result = new EvaluateVisitor().visit(node, manager);
 		if (result.equals(valueOf))
@@ -195,7 +195,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			+ result.getClass().getSimpleName() + ")");
 	}
 
-	public EvaluationManager generateManager()
+	protected EvaluationManager generateManager()
 	{
 		return EvaluationManager.generate(localSetup.getFormulaManager(),
 			localSetup.getGlobalScopeInst(), Number.class);
