@@ -69,12 +69,12 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 	private final int priority;
 	private final int inherent;
 
-	public AbstractModifier(Class<T> cl)
+	private AbstractModifier(Class<T> cl)
 	{
 		this(0, cl, 100);
 	}
 
-	public AbstractModifier(int inherent, Class<T> cl, int priority)
+	private AbstractModifier(int inherent, Class<T> cl, int priority)
 	{
 		format = cl;
 		this.priority = priority;

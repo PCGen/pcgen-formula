@@ -27,7 +27,7 @@ package pcgen.base.formula.base;
  *            The type of object managed by a DependencyManager when the given
  *            key is provided.
  */
-public final class DependencyKey<T>
+final class DependencyKey<T>
 {
 	/**
 	 * Cast the given object to the type contained by this DependencyKey.

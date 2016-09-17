@@ -224,7 +224,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * @param varName
 	 *            The variable name to be added as a dependency
 	 */
-	public static void visitVariable(String varName, DependencyManager manager)
+	private static void visitVariable(String varName, DependencyManager manager)
 	{
 		VariableLibrary varLib =
 				manager.peek(DependencyManager.FMANAGER).getFactory();
