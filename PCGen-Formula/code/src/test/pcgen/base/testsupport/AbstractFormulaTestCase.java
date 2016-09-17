@@ -139,7 +139,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), null);
+			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
 		if (!semantics.isValid())
 		{
@@ -205,7 +205,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
-			localSetup.getFormulaManager(), getGlobalScope(), null);
+			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
 		if (semantics.isValid())
 		{

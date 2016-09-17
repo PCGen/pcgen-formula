@@ -74,7 +74,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		FormulaManager fm = indSetup.getFormulaManager();
 		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
 
-		FormulaSemantics fs = FormulaSemantics.generate(fm, globalScope, null);
+		FormulaSemantics fs = FormulaSemantics.generate(fm, globalScope);
 		try
 		{
 			new ComplexNEPFormula("3+5").isValid(numberMgr, null);
