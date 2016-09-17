@@ -28,7 +28,7 @@ import pcgen.base.formula.inst.SimpleLegalScope;
 public class VariableIDTest extends TestCase
 {
 
-	private NumberManager numberManager = FormatUtilities.NUMBER_MANAGER;
+	private final NumberManager numberManager = FormatUtilities.NUMBER_MANAGER;
 	private LegalScopeLibrary library;
 	private ScopeInstanceFactory instanceFactory;
 
