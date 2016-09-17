@@ -379,7 +379,8 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	public static Object visit(ASTPCGenBracket node, Object data)
+	@Override
+	public Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		FormulaSemantics semantics = (FormulaSemantics) data;
@@ -396,7 +397,8 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	public static Object visit(ASTFParen node, Object data)
+	@Override
+	public Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		FormulaSemantics semantics = (FormulaSemantics) data;
@@ -413,7 +415,8 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	public static Object visit(ASTQuotString node, Object data)
+	@Override
+	public Object visit(ASTQuotString node, Object data)
 	{
 		return FormatUtilities.STRING_MANAGER;
 	}
