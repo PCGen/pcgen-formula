@@ -56,10 +56,10 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(2)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 		formula = "if(2, 3)";
 		node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(2,4,5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(2>0,4,5<6)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(2>0,if(-0),5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(2>0,4,if(4))";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(ab,4,5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(1>0,2,3)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Integer.valueOf(2));
 		Object rv =
@@ -120,7 +120,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(-2<0,3,-4)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Integer.valueOf(3));
 		Object rv =
@@ -133,7 +133,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(0.3>0,7.8,5.6)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(7.8));
 		Object rv =
@@ -146,7 +146,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(-0.4<0,-3.4,-5.3)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.4));
 		Object rv =
@@ -159,7 +159,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(0==5,8.3,-3.3)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 		Object rv =
@@ -172,7 +172,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(0.0==6.7,8.3,-3.3)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 		Object rv =
@@ -185,7 +185,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if( 4.6>0,-3.3,8)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 	}
@@ -195,7 +195,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(4.6>0,-3.3,8 )";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 	}
@@ -205,7 +205,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if(4.6>0 , -3.3 , 8)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 	}
@@ -215,7 +215,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "if (4.6>0,-3.3,8)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, true);
 		evaluatesTo(formula, node, Double.valueOf(-3.3));
 		List<VariableID<?>> vars = getVariables(node);
@@ -228,7 +228,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		getVariableStore().put(getVariable("a"), 5);
 		String formula = "if(4.6>0,a,8.1)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		evaluatesTo(formula, node, Integer.valueOf(5));
 		List<VariableID<?>> vars = getVariables(node);
@@ -246,7 +246,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		variableStore.put(getVariable("c"), 3);
 		String formula = "if(a>0,b,c)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		evaluatesTo(formula, node, Integer.valueOf(3));
 		List<VariableID<?>> vars = getVariables(node);
@@ -270,7 +270,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		getVariableStore().put(variable, true);
 		String formula = "if(a, 4, 5)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -284,7 +284,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		getVariableStore().put(getVariable("a"), 5);
 		String formula = "if(4<5, a, 3.4)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
@@ -298,7 +298,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		getVariableStore().put(getVariable("a"), 5);
 		String formula = "if(4<3, 3.4, a)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(1, vars.size());
