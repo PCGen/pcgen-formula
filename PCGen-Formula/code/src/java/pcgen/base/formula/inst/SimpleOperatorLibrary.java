@@ -37,15 +37,13 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 	 * HashMapToList from the Operators to the available OperatorActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, OperatorAction> operatorMTL =
-			new HashMapToList<Operator, OperatorAction>();
+	private final HashMapToList<Operator, OperatorAction> operatorMTL = new HashMapToList<>();
 
 	/**
 	 * HashMapToList from the Operators to the available UnaryActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, UnaryAction> unaryMTL =
-			new HashMapToList<Operator, UnaryAction>();
+	private final HashMapToList<Operator, UnaryAction> unaryMTL = new HashMapToList<>();
 
 	/**
 	 * {@inheritDoc}

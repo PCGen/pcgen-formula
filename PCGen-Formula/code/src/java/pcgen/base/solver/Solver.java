@@ -65,16 +65,14 @@ public class Solver<T>
 	 * The list of Modifiers for this Solver. This is maintained as an ordered
 	 * list: TreeMap sorts the Modifiers by their priority.
 	 */
-	private final TreeMapToList<Long, ModInfo<T>> modifierList =
-			new TreeMapToList<Long, ModInfo<T>>();
+	private final TreeMapToList<Long, ModInfo<T>> modifierList = new TreeMapToList<>();
 
 	/**
 	 * A map of sources to the Modifiers provided by that source. This is used
 	 * for tracing responsibility for modification as well as allowing a
 	 * "global remove" of Modifiers from a given source.
 	 */
-	private final HashMapToList<Object, Modifier<T>> sourceList =
-			new HashMapToList<Object, Modifier<T>>();
+	private final HashMapToList<Object, Modifier<T>> sourceList = new HashMapToList<>();
 
 	/**
 	 * Constructs a new Solver with the given default Modifier and
@@ -246,10 +244,10 @@ public class Solver<T>
 	 */
 	public List<ProcessStep<T>> diagnose()
 	{
-		List<ProcessStep<T>> steps = new ArrayList<ProcessStep<T>>();
+		List<ProcessStep<T>> steps = new ArrayList<>();
 		T stepResult = defaultModifier.process(evaluationManager);
-		steps.add(new ProcessStep<T>(defaultModifier, new DefaultValue(
-			defaultModifier.getVariableFormat().getSimpleName()), stepResult));
+		steps.add(new ProcessStep<>(defaultModifier, new DefaultValue(defaultModifier.getVariableFormat()
+		                                                                             .getSimpleName()), stepResult));
 		if (!modifierList.isEmpty())
 		{
 			for (Long priority : modifierList.getKeySet())
@@ -259,8 +257,7 @@ public class Solver<T>
 					evaluationManager.set(EvaluationManager.INPUT, stepResult);
 					stepResult = modInfo.modifier.process(evaluationManager);
 					@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-					ProcessStep<T> step = new ProcessStep<T>(modInfo.modifier,
-						modInfo.source, stepResult);
+					ProcessStep<T> step = new ProcessStep<>(modInfo.modifier, modInfo.source, stepResult);
 					steps.add(step);
 				}
 			}
