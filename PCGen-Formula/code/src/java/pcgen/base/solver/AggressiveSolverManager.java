@@ -30,6 +30,7 @@ import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VariableID;
 import pcgen.base.formula.base.VariableStore;
 import pcgen.base.formula.base.WriteableVariableStore;
+import pcgen.base.graph.base.Graph;
 import pcgen.base.graph.inst.DefaultDirectionalGraphEdge;
 import pcgen.base.graph.inst.DirectionalSetMapGraph;
 import pcgen.base.util.FormatManager;
@@ -71,7 +72,7 @@ public class AggressiveSolverManager
 	 * this implicitly stores the dependencies between the Solvers that are part
 	 * of this AggressiveSolverManager.
 	 */
-	private final DirectionalSetMapGraph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>> graph =
+	private final Graph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>> graph =
 			new DirectionalSetMapGraph<>();
 
 	/**

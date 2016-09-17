@@ -23,6 +23,7 @@ import pcgen.base.formatmanager.FormatUtilities;
 import pcgen.base.formula.base.LegalScopeLibrary;
 import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VariableID;
+import pcgen.base.formula.base.WriteableVariableStore;
 
 public class SimpleVariableStoreTest extends TestCase
 {
@@ -41,7 +42,7 @@ public class SimpleVariableStoreTest extends TestCase
 
 	public void testNulls()
 	{
-		SimpleVariableStore varStore = new SimpleVariableStore();
+		WriteableVariableStore varStore = new SimpleVariableStore();
 		NumberManager numberManager = new NumberManager();
 		ScopeInstance globalInst = instanceFactory.getGlobalInstance("Global");
 		try

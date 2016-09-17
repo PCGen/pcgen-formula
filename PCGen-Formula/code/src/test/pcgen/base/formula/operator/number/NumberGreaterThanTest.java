@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.number;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class NumberGreaterThanTest extends TestCase
@@ -27,7 +29,7 @@ public class NumberGreaterThanTest extends TestCase
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 	private static final Class<Double> DOUBLE_CLASS = Double.class;
 
-	private final NumberGreaterThan op = new NumberGreaterThan();
+	private final OperatorAction op = new NumberGreaterThan();
 
 	public void testOperator()
 	{

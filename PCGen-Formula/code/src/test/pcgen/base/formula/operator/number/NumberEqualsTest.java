@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.number;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class NumberEqualsTest extends TestCase
@@ -27,7 +29,7 @@ public class NumberEqualsTest extends TestCase
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 	private static final Class<Double> DOUBLE_CLASS = Double.class;
 
-	private final NumberEquals op = new NumberEquals();
+	private final OperatorAction op = new NumberEquals();
 
 	public void testOperator()
 	{
