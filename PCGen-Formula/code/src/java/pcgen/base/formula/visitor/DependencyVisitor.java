@@ -166,8 +166,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	/**
 	 * Has no dependencies.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		return data;
 	}
@@ -213,8 +212,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * variable, this loads the appropriate VariableID into the
 	 * DependencyManager.
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		visitVariable(node.getText(), (DependencyManager) data);
 		return data;
@@ -226,7 +224,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * @param varName
 	 *            The variable name to be added as a dependency
 	 */
-	public void visitVariable(String varName, DependencyManager manager)
+	public static void visitVariable(String varName, DependencyManager manager)
 	{
 		VariableLibrary varLib =
 				manager.peek(DependencyManager.FMANAGER).getFactory();
@@ -246,8 +244,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * node in DependencyVisitor indicates either an error in the implementation
 	 * of the formula or a tree structure problem in the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -261,8 +258,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * either an error in the implementation of the formula or a tree structure
 	 * problem in the formula.
 	 */
-	@Override
-	public Object visit(ASTFParen node, Object data)
+	public static Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -272,8 +268,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	/**
 	 * Has no dependencies.
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(ASTQuotString node, Object data)
 	{
 		return data;
 	}

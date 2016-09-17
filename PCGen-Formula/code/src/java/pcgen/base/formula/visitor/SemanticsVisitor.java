@@ -210,8 +210,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Processes a numeric node. This ensures that the node has no children and
 	 * that it can be parsed as a numeric value.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -333,8 +332,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * VariableIDFactory that the variable usage is valid within the scope
 	 * recognized by this SemanticsVisitor.
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		FormulaSemantics semantics = (FormulaSemantics) data;
 		if (node.jjtGetNumChildren() != 0)
@@ -366,8 +364,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * @return The format for the given Variable, in the scope as described by
 	 *         the FormulaSemantics
 	 */
-	public FormatManager<?> getVariableFormat(FormulaSemantics semantics,
-		String varName)
+	public static FormatManager<?> getVariableFormat(FormulaSemantics semantics, String varName)
 	{
 		VariableLibrary varLib =
 				semantics.peek(FormulaSemantics.FMANAGER).getFactory();
@@ -382,8 +379,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		FormulaSemantics semantics = (FormulaSemantics) data;
@@ -400,8 +396,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTFParen node, Object data)
+	public static Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		FormulaSemantics semantics = (FormulaSemantics) data;
@@ -418,8 +413,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(ASTQuotString node, Object data)
 	{
 		return FormatUtilities.STRING_MANAGER;
 	}
@@ -545,7 +539,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	 * Generates an invalid argument count report based on the given node and
 	 * expected argument count.
 	 */
-	private String getInvalidCountReport(SimpleNode node, int expectedCount)
+	private static String getInvalidCountReport(SimpleNode node, int expectedCount)
 	{
 		int argLength = node.jjtGetNumChildren();
 		Node[] args = new Node[argLength];

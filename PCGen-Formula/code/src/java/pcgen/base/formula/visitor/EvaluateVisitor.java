@@ -182,8 +182,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Returns the contents of the node, which is a numeric value.
 	 */
-	@Override
-	public Object visit(ASTNum node, Object data)
+	public static Object visit(ASTNum node, Object data)
 	{
 		String nodeText = node.getText();
 		try
@@ -234,8 +233,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * VariableID and then fetch the value for that VariableID from the
 	 * VariableStore (cache).
 	 */
-	@Override
-	public Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(ASTPCGenSingleWord node, Object data)
 	{
 		return visitVariable(node.getText(), (EvaluationManager) data);
 	}
@@ -247,8 +245,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTPCGenBracket node, Object data)
+	public static Object visit(ASTPCGenBracket node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -262,8 +259,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 * an error in the implementation of the formula or a tree structure problem
 	 * in the formula.
 	 */
-	@Override
-	public Object visit(ASTFParen node, Object data)
+	public static Object visit(ASTFParen node, Object data)
 	{
 		//Should be stripped by the function
 		throw new IllegalStateException(
@@ -273,8 +269,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	/**
 	 * Evaluates a Quoted String (so obviously returns a String).
 	 */
-	@Override
-	public Object visit(ASTQuotString node, Object data)
+	public static Object visit(ASTQuotString node, Object data)
 	{
 		//The quotes are stripped by the parser
 		return node.getText();
@@ -365,7 +360,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 *            The EvaluationManager used in evaluation
 	 * @return the value for the given specific variable
 	 */
-	public Object visitVariable(String varName, EvaluationManager manager)
+	public static Object visitVariable(String varName, EvaluationManager manager)
 	{
 		FormulaManager fm = manager.peek(EvaluationManager.FMANAGER);
 		VariableLibrary varLibrary = fm.getFactory();
