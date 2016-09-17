@@ -119,7 +119,7 @@ public class IndividualSetup
 	{
 		if (variableStore == null)
 		{
-			variableStore = buildVariableStore();
+			variableStore = IndividualSetup.buildVariableStore();
 		}
 		return variableStore;
 	}

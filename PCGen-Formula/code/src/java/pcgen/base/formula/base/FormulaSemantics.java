@@ -88,8 +88,8 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public void setInvalid(String text)
 	{
-		set(VALID, false);
-		set(REPORT, text);
+		set(FormulaSemantics.VALID, false);
+		set(FormulaSemantics.REPORT, text);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public String getReport()
 	{
-		return peek(REPORT);
+		return peek(FormulaSemantics.REPORT);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class FormulaSemantics extends MappedDeque
 	 */
 	public boolean isValid()
 	{
-		return peek(VALID);
+		return peek(FormulaSemantics.VALID);
 	}
 
 	/**

@@ -105,7 +105,7 @@ public class VariableLibrary
 		{
 			throw new IllegalArgumentException("LegalScope cannot be null");
 		}
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		if (!variableDefs.containsKey(varName))
 		{
 			//Can't be a conflict
@@ -272,7 +272,7 @@ public class VariableLibrary
 	 */
 	public Set<LegalScope> getKnownLegalScopes(String varName)
 	{
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		return variableDefs.getSecondaryKeySet(varName);
 	}
 
@@ -317,7 +317,7 @@ public class VariableLibrary
 			throw new IllegalArgumentException("Cannot get VariableID "
 				+ varName + " for " + messageScope + " scope");
 		}
-		checkLegalVarName(varName);
+		VariableLibrary.checkLegalVarName(varName);
 		FormatManager<?> formatManager =
 				variableDefs.get(varName, scopeInst.getLegalScope());
 		if (formatManager != null)

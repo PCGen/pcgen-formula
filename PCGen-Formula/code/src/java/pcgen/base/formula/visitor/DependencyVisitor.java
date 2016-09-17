@@ -197,7 +197,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 		}
 		else if (argNode instanceof ASTPCGenBracket)
 		{
-			visitVariable(name, manager);
+			DependencyVisitor.visitVariable(name, manager);
 		}
 		else
 		{
