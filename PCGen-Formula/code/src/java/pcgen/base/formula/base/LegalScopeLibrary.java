@@ -42,14 +42,14 @@ public class LegalScopeLibrary
 	/**
 	 * The Map of LegalScope objects to their list of child LegalScope objects.
 	 */
-	private MapToList<LegalScope, LegalScope> scopeChildren = new HashMapToList<>();
+	private final MapToList<LegalScope, LegalScope> scopeChildren = new HashMapToList<>();
 
 	/**
 	 * A set of the LegalScope objects loaded in this LegalScopeLibrary. Note
 	 * that this is distinct from the keys of scopeChildren, since only parents
 	 * are loaded as keys.
 	 */
-	private HashMap scopes = new CaseInsensitiveMap<>();
+	private final HashMap scopes = new CaseInsensitiveMap<>();
 
 	/**
 	 * Registers a LegalScope with this LegalScopeLibrary.
