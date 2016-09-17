@@ -70,9 +70,9 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 	private final int priority;
 	private final int inherent;
 
-	public AbstractModifier(int inherent, Class<T> cl)
+	public AbstractModifier(Class<T> cl)
 	{
-		this(inherent, cl, 100);
+		this(0, cl, 100);
 	}
 
 	public AbstractModifier(int inherent, Class<T> cl, int priority)
@@ -168,7 +168,7 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 
 	public static AbstractModifier<String> setString()
 	{
-		return new AbstractModifier<String>(0, String.class)
+		return new AbstractModifier<String>(String.class)
 		{
 			@Override
 			public String process(EvaluationManager manager)
