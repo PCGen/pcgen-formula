@@ -186,7 +186,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 		FormulaManager formulaManager =
 				manager.peek(DependencyManager.FMANAGER);
 		FunctionLibrary library = formulaManager.getLibrary();
-		ASTPCGenSingleWord fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
+		SimpleNode fnode = (ASTPCGenSingleWord) node.jjtGetChild(0);
 		String name = fnode.getText();
 		Node argNode = node.jjtGetChild(1);
 		if (argNode instanceof ASTFParen)
@@ -212,7 +212,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * variable, this loads the appropriate VariableID into the
 	 * DependencyManager.
 	 */
-	public static Object visit(ASTPCGenSingleWord node, Object data)
+	public static Object visit(SimpleNode node, Object data)
 	{
 		visitVariable(node.getText(), (DependencyManager) data);
 		return data;
@@ -288,7 +288,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 * double-dispatch in order to reach another method on this
 	 * DependencyVisitor for the child.
 	 */
-	private Object checkAllChildren(SimpleNode node, Object data)
+	private Object checkAllChildren(Node node, Object data)
 	{
 		int childCount = node.jjtGetNumChildren();
 		for (int i = 0; i < childCount; i++)

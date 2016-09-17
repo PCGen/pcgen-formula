@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pcgen.base.util.CaseInsensitiveMap;
 import pcgen.base.util.HashMapToList;
@@ -49,7 +50,7 @@ public class LegalScopeLibrary
 	 * that this is distinct from the keys of scopeChildren, since only parents
 	 * are loaded as keys.
 	 */
-	private final HashMap scopes = new CaseInsensitiveMap<>();
+	private final Map scopes = new CaseInsensitiveMap<>();
 
 	/**
 	 * Registers a LegalScope with this LegalScopeLibrary.

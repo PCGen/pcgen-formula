@@ -73,7 +73,7 @@ public class ArgFunction implements Function
 	@Override
 	public Boolean isStatic(StaticVisitor visitor, Node[] args)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
 		return (Boolean) visitor.visit((SimpleNode) masterArgs[argNum]);
 	}
@@ -146,7 +146,7 @@ public class ArgFunction implements Function
 	public Object evaluate(EvaluateVisitor visitor, Node[] args,
 		EvaluationManager manager)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
 		return visitor.visit((SimpleNode) masterArgs[argNum], manager);
 	}
@@ -162,7 +162,7 @@ public class ArgFunction implements Function
 	public void getDependencies(DependencyVisitor visitor,
 		DependencyManager manager, Node[] args)
 	{
-		ASTNum node = (ASTNum) args[0];
+		SimpleNode node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
 		ArgumentDependencyManager argManager =
 				manager.peek(ArgumentDependencyManager.KEY);

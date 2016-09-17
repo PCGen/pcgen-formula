@@ -169,7 +169,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 		 * passed in - it should NOT contain an ArgumentDependencyManager
 		 */
 		assertTrue(fdm.peek(ArgumentDependencyManager.KEY) == null);
-		DependencyVisitor dv = new DependencyVisitor();
+		pcgen.base.formula.parse.FormulaParserVisitor dv = new DependencyVisitor();
 		dv.visit(node, fdm);
 	}
 
