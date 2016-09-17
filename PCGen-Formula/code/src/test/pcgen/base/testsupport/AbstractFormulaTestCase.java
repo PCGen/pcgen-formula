@@ -135,7 +135,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			}});
 	}
 
-	public void isValid(String formula, SimpleNode node, FormatManager<?> formatManager)
+	public void isValid(String formula, SimpleNode node)
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
@@ -202,7 +202,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 			localSetup.getGlobalScopeInst(), Number.class);
 	}
 
-	protected void isNotValid(String formula, SimpleNode node, FormatManager<?> formatManager)
+	protected void isNotValid(String formula, SimpleNode node)
 	{
 		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
