@@ -65,11 +65,11 @@ public class DependencyManager extends MappedDeque
 	 */
 	public void addVariable(VariableID<?> varID)
 	{
-		ArrayList<VariableID<?>> vars = peek(VARIABLES);
+		ArrayList<VariableID<?>> vars = peek(DependencyManager.VARIABLES);
 		if (vars == null)
 		{
 			vars = new ArrayList<>();
-			set(VARIABLES, vars);
+			set(DependencyManager.VARIABLES, vars);
 		}
 		vars.add(varID);
 	}
