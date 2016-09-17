@@ -61,7 +61,7 @@ public class ProcessStep<T>
 	 * @param result
 	 *            The resulting value after the given Modifier was applied
 	 */
-	public ProcessStep(Modifier<T> modifier, Object source, T result)
+	ProcessStep(Modifier<T> modifier, Object source, T result)
 	{
 		this.modifier = modifier;
 		this.source = source;
