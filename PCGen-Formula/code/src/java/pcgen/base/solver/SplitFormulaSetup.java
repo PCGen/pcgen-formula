@@ -52,13 +52,13 @@ public class SplitFormulaSetup
 	/**
 	 * The SimpleFunctionLibrary for this SplitFormulaSetup.
 	 */
-	private final SimpleFunctionLibrary functionLib =
+	private final FunctionLibrary functionLib =
 			new SimpleFunctionLibrary();
 
 	/**
 	 * The SimpleOperatorLibrary for this SplitFormulaSetup.
 	 */
-	private final SimpleOperatorLibrary operatorLib =
+	private final OperatorLibrary operatorLib =
 			new SimpleOperatorLibrary();
 
 	/**

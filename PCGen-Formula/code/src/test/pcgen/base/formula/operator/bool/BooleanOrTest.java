@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.bool;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class BooleanOrTest extends TestCase
@@ -26,7 +28,7 @@ public class BooleanOrTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 
-	private final BooleanOr op = new BooleanOr();
+	private final OperatorAction op = new BooleanOr();
 
 	public void testOperator()
 	{

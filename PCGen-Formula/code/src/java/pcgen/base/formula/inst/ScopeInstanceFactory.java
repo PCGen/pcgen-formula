@@ -217,7 +217,7 @@ public class ScopeInstanceFactory
 	private ScopeInstance constructInstance(ScopeInstance parent,
 		LegalScope scope)
 	{
-		SimpleScopeInstance inst =
+		ScopeInstance inst =
 				new SimpleScopeInstance(parent, scope);
 		scopeInstances.addToListFor(parent, scope, inst);
 		return inst;

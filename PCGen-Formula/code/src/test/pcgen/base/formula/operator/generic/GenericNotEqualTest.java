@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.operator.generic;
 
+import pcgen.base.formula.base.OperatorAction;
+
 import junit.framework.TestCase;
 
 public class GenericNotEqualTest extends TestCase
@@ -26,7 +28,7 @@ public class GenericNotEqualTest extends TestCase
 	private static final Class<Boolean> BOOLEAN_CLASS = Boolean.class;
 	private static final Class<Integer> INTEGER_CLASS = Integer.class;
 
-	private final GenericNotEqual op = new GenericNotEqual();
+	private final OperatorAction op = new GenericNotEqual();
 
 	public void testOperator()
 	{
