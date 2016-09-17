@@ -65,13 +65,11 @@ public class IndividualSetup
 	 * Note: The LegalScope returned by the LegalScopeLibrary of the given
 	 * SplitFormulaSetup must also be a "Global" scope in that it must return
 	 * null as the parent LegalScope or this will throw an Exception.
-	 * 
-	 * @param parent
+	 *  @param parent
 	 *            The parent SplitFormulaSetup for this IndividualSetup
-	 * @param globalName
-	 *            The name of the "global" LegalScope for this IndividualSetup
+	 *
 	 */
-	public IndividualSetup(SplitFormulaSetup parent, String globalName)
+	public IndividualSetup(SplitFormulaSetup parent)
 	{
 		LegalScopeLibrary scopeLibrary = parent.getLegalScopeLibrary();
 		instanceFactory = new ScopeInstanceFactory(scopeLibrary);
@@ -79,7 +77,7 @@ public class IndividualSetup
 				new SimpleFormulaManager(parent.getFunctionLibrary(),
 					parent.getOperatorLibrary(), parent.getVariableLibrary(),
 					getVariableStore(), parent.getSolverFactory());
-		globalScopeInst = instanceFactory.getGlobalInstance(globalName);
+		globalScopeInst = instanceFactory.getGlobalInstance("Global");
 	}
 
 	/**
