@@ -130,7 +130,7 @@ public class ArgFunction implements Function
 		}
 	}
 
-	private void assertArgs(FormulaSemantics semantics, int argNum)
+	private static void assertArgs(FormulaSemantics semantics, int argNum)
 	{
 		ArgumentDependencyManager argManager =
 				semantics.peek(ArgumentDependencyManager.KEY);

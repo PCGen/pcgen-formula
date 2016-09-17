@@ -130,7 +130,7 @@ public class IndividualSetup
 	 * 
 	 * @return a new WriteableVariableStore for this IndividualSetup.
 	 */
-	protected WriteableVariableStore buildVariableStore()
+	protected static WriteableVariableStore buildVariableStore()
 	{
 		return new SimpleVariableStore();
 	}
