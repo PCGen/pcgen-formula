@@ -52,9 +52,9 @@ public enum Operator
 		return symbol;
 	}
 
-	private String symbol;
+	private final String symbol;
 
-	private Operator(String op)
+	Operator(String op)
 	{
 		symbol = op;
 	}
