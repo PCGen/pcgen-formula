@@ -105,7 +105,7 @@ class AggressiveSolverManager
 	 * @throws IllegalArgumentException
 	 *             if any of the parameters is null
 	 */
-	public AggressiveSolverManager(FormulaManager manager,
+	AggressiveSolverManager(FormulaManager manager,
 		SolverFactory solverFactory, WriteableVariableStore resultStore)
 	{
 		if (manager == null)
