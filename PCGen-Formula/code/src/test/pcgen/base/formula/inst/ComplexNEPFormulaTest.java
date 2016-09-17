@@ -18,6 +18,7 @@ import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VariableID;
 import pcgen.base.solver.IndividualSetup;
 import pcgen.base.solver.SplitFormulaSetup;
+import pcgen.base.util.FormatManager;
 
 public class ComplexNEPFormulaTest extends TestCase
 {
@@ -117,7 +118,7 @@ public class ComplexNEPFormulaTest extends TestCase
 			booleanMgr);
 		setup.getVariableLibrary().assertLegalVariableID("d", globalScope,
 			booleanMgr);
-		StringManager stringMgr = new StringManager();
+		FormatManager stringMgr = new StringManager();
 		new ComplexNEPFormula("if(c||d,\"A\",\"B\")").isValid(stringMgr, fs);
 		assertEquals(true, fs.isValid());
 

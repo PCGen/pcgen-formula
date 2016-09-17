@@ -137,7 +137,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 
 	protected void isValid(String formula, SimpleNode node)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		pcgen.base.formula.parse.FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
 			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
@@ -203,7 +203,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 
 	protected void isNotValid(String formula, SimpleNode node)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		pcgen.base.formula.parse.FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = FormulaSemantics.generate(
 			localSetup.getFormulaManager(), getGlobalScope());
 		semanticsVisitor.visit(node, semantics);
