@@ -126,7 +126,7 @@ public class NumberEqualsTest extends TestCase
 			assertNull(op.evaluate(true, Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -135,7 +135,7 @@ public class NumberEqualsTest extends TestCase
 			assertNull(op.evaluate(new Object(), Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}

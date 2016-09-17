@@ -79,7 +79,7 @@ public class BooleanNotTest extends TestCase
 			assertNull(op.evaluate(Double.valueOf(4.5)));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
@@ -88,7 +88,7 @@ public class BooleanNotTest extends TestCase
 			assertNull(op.evaluate(new Object()));
 			fail();
 		}
-		catch (Exception e)
+		catch (RuntimeException e)
 		{
 			//expected
 		}
