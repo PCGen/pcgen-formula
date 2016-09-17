@@ -136,10 +136,8 @@ public class VariableLibraryTest extends TestCase
 	public void testAssertVariable()
 	{
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
-		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		SimpleLegalScope eqScope =
 				new SimpleLegalScope(globalScope, "Equipment");
-		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertTrue(
 			varLib.assertLegalVariableID("Walk", globalScope, numberManager));
 		//Dupe is safe
@@ -149,6 +147,7 @@ public class VariableLibraryTest extends TestCase
 		assertFalse(
 			varLib.assertLegalVariableID("Walk", eqScope, numberManager));
 		//Check child recursive
+		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertFalse(
 			varLib.assertLegalVariableID("Walk", eqPartScope, numberManager));
 
@@ -161,6 +160,7 @@ public class VariableLibraryTest extends TestCase
 		assertFalse(
 			varLib.assertLegalVariableID("Float", globalScope, numberManager));
 		//Allow peer
+		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		assertTrue(
 			varLib.assertLegalVariableID("Float", spScope, numberManager));
 
@@ -214,10 +214,8 @@ public class VariableLibraryTest extends TestCase
 	public void testIsLegalVID()
 	{
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
-		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		SimpleLegalScope eqScope =
 				new SimpleLegalScope(globalScope, "Equipment");
-		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertTrue(
 			varLib.assertLegalVariableID("Walk", globalScope, numberManager));
 		assertTrue(varLib.isLegalVariableID(globalScope, "Walk"));
@@ -225,6 +223,7 @@ public class VariableLibraryTest extends TestCase
 		//Works for child
 		assertTrue(varLib.isLegalVariableID(eqScope, "Walk"));
 		//Works for child recursively
+		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertTrue(varLib.isLegalVariableID(eqPartScope, "Walk"));
 
 		assertTrue(
@@ -235,6 +234,7 @@ public class VariableLibraryTest extends TestCase
 		//but not parent
 		assertFalse(varLib.isLegalVariableID(globalScope, "Float"));
 		//and not peer
+		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		assertFalse(varLib.isLegalVariableID(spScope, "Float"));
 
 		assertTrue(
@@ -296,15 +296,15 @@ public class VariableLibraryTest extends TestCase
 	public void testKnownVarScope()
 	{
 		LegalScope globalScope = new SimpleLegalScope(null, "Global");
-		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		LegalScope eqScope = new SimpleLegalScope(globalScope, "Equipment");
-		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertTrue(
 			varLib.assertLegalVariableID("Walk", globalScope, numberManager));
 		assertTrue(
 			varLib.assertLegalVariableID("Float", eqScope, numberManager));
+		LegalScope eqPartScope = new SimpleLegalScope(eqScope, "Part");
 		assertTrue(
 			varLib.assertLegalVariableID("Hover", eqPartScope, numberManager));
+		LegalScope spScope = new SimpleLegalScope(globalScope, "Spell");
 		assertTrue(
 			varLib.assertLegalVariableID("Hover", spScope, numberManager));
 		Set<LegalScope> list = varLib.getKnownLegalScopes("Walk");
@@ -497,9 +497,9 @@ public class VariableLibraryTest extends TestCase
 	public void testGetVariableFormat()
 	{
 		LegalScope globalScope = new SimpleLegalScope(null, "Global");
-		LegalScope eqScope = new SimpleLegalScope(globalScope, "Equipment");
 		assertTrue(
 			varLib.assertLegalVariableID("Walk", globalScope, numberManager));
+		LegalScope eqScope = new SimpleLegalScope(globalScope, "Equipment");
 		assertTrue(
 			varLib.assertLegalVariableID("Float", eqScope, numberManager));
 		try
@@ -534,7 +534,6 @@ public class VariableLibraryTest extends TestCase
 	@Test
 	public void testProveReuse()
 	{
-		BooleanManager booleanManager = FormatUtilities.BOOLEAN_MANAGER;
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
 		varScopeLib.registerScope(globalScope);
 		LegalScope eqScope =
@@ -558,6 +557,7 @@ public class VariableLibraryTest extends TestCase
 		assertEquals(eqInst, vidm.getScope());
 		assertEquals(Number.class, vidm.getVariableFormat());
 
+		BooleanManager booleanManager = FormatUtilities.BOOLEAN_MANAGER;
 		assertTrue(
 			varLib.assertLegalVariableID("Walk", abScope, booleanManager));
 		VariableID vidf = varLib.getVariableID(abInst, "Walk");

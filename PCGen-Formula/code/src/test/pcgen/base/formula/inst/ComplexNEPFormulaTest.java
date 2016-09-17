@@ -72,8 +72,6 @@ public class ComplexNEPFormulaTest extends TestCase
 
 		FormulaManager fm = indSetup.getFormulaManager();
 		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
-		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
-		StringManager stringMgr = new StringManager();
 
 		FormulaSemantics fs = FormulaSemantics.generate(fm, globalScope, null);
 		try
@@ -113,10 +111,12 @@ public class ComplexNEPFormulaTest extends TestCase
 		new ComplexNEPFormula("if(a==b,5,-9)").isValid(numberMgr, fs);
 		assertEquals(true, fs.isValid());
 
+		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
 		setup.getVariableLibrary().assertLegalVariableID("c", globalScope,
 			booleanMgr);
 		setup.getVariableLibrary().assertLegalVariableID("d", globalScope,
 			booleanMgr);
+		StringManager stringMgr = new StringManager();
 		new ComplexNEPFormula("if(c||d,\"A\",\"B\")").isValid(stringMgr, fs);
 		assertEquals(true, fs.isValid());
 
@@ -139,9 +139,6 @@ public class ComplexNEPFormulaTest extends TestCase
 		ScopeInstance globalInst = indSetup.getGlobalScopeInst();
 		DependencyManager depManager = setupDM(indSetup);
 
-		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
-		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
-
 		new ComplexNEPFormula("3+5").getDependencies(depManager);
 		assertTrue(depManager.getVariables().isEmpty());
 		assertEquals(-1, depManager.peek(ArgumentDependencyManager.KEY)
@@ -159,6 +156,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		assertEquals(-1, depManager.peek(ArgumentDependencyManager.KEY)
 			.getMaximumArgument());
 
+		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
 		setup.getVariableLibrary().assertLegalVariableID("a", globalScope,
 			numberMgr);
 		setup.getVariableLibrary().assertLegalVariableID("b", globalScope,
@@ -197,6 +195,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		assertEquals(-1, depManager.peek(ArgumentDependencyManager.KEY)
 			.getMaximumArgument());
 
+		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
 		setup.getVariableLibrary().assertLegalVariableID("c", globalScope,
 			booleanMgr);
 		setup.getVariableLibrary().assertLegalVariableID("d", globalScope,
@@ -259,13 +258,11 @@ public class ComplexNEPFormulaTest extends TestCase
 			//ok
 		}
 
-		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
-		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
-
 		assertEquals(8, new ComplexNEPFormula("3+5").resolve(evalManager));
 		assertEquals(15, new ComplexNEPFormula("3*5").resolve(evalManager));
 		assertEquals(56, new ComplexNEPFormula("(3+5)*7").resolve(evalManager));
 
+		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
 		setup.getVariableLibrary().assertLegalVariableID("a", globalScope,
 			numberMgr);
 		setup.getVariableLibrary().assertLegalVariableID("b", globalScope,
@@ -283,6 +280,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		assertEquals(-9,
 			new ComplexNEPFormula("if(a==b,5,-9)").resolve(evalManager));
 
+		BooleanManager booleanMgr = FormatUtilities.BOOLEAN_MANAGER;
 		setup.getVariableLibrary().assertLegalVariableID("c", globalScope,
 			booleanMgr);
 		setup.getVariableLibrary().assertLegalVariableID("d", globalScope,
