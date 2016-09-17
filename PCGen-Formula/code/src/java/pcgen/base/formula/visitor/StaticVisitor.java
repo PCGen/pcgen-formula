@@ -118,8 +118,7 @@ public class StaticVisitor implements FormulaParserVisitor
 	 * 
 	 * {@inheritDoc}
 	 */
-	@Override
-	public Object visit(SimpleNode node, Object data)
+	public Object visit(SimpleNode node)
 	{
 		//Delegate to the appropriate class
 		return node.jjtAccept(this, null);
