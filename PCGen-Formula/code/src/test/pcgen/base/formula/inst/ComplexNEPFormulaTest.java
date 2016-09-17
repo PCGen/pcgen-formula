@@ -68,7 +68,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
-		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
+		IndividualSetup indSetup = new IndividualSetup(setup);
 
 		FormulaManager fm = indSetup.getFormulaManager();
 		NumberManager numberMgr = FormatUtilities.NUMBER_MANAGER;
@@ -142,7 +142,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
-		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
+		IndividualSetup indSetup = new IndividualSetup(setup);
 
 		ScopeInstance globalInst = indSetup.getGlobalScopeInst();
 		DependencyManager depManager = setupDM(indSetup);
@@ -251,7 +251,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
 		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
-		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
+		IndividualSetup indSetup = new IndividualSetup(setup);
 
 		ScopeInstance globalInst = indSetup.getGlobalScopeInst();
 		EvaluationManager evalManager =
