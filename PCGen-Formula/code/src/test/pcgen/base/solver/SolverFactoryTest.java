@@ -38,7 +38,7 @@ public class SolverFactoryTest extends TestCase
 		SplitFormulaSetup sfs = new SplitFormulaSetup();
 		sfs.getLegalScopeLibrary()
 			.registerScope(new SimpleLegalScope(null, "Global"));
-		IndividualSetup indSetup = new IndividualSetup(sfs, "Global");
+		IndividualSetup indSetup = new IndividualSetup(sfs);
 		evalManager =
 				EvaluationManager.generate(indSetup.getFormulaManager(),
 					indSetup.getGlobalScopeInst(), Number.class);
