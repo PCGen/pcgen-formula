@@ -360,7 +360,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 	 *            The EvaluationManager used in evaluation
 	 * @return the value for the given specific variable
 	 */
-	public static Object visitVariable(String varName, EvaluationManager manager)
+	private static Object visitVariable(String varName, EvaluationManager manager)
 	{
 		FormulaManager fm = manager.peek(EvaluationManager.FMANAGER);
 		VariableLibrary varLibrary = fm.getFactory();
