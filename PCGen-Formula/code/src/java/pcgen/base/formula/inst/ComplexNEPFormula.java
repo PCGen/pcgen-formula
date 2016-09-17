@@ -188,7 +188,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	@Override
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
+		CharSequence sb = new StringBuilder();
 		RECONSTRUCTION_VISITOR.visit(root, sb);
 		return sb.toString();
 	}

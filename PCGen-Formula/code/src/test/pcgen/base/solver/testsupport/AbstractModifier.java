@@ -116,8 +116,8 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		return false;
 	}
 	
-	public static AbstractModifier<Number[]> addToArray(final int value,
-		int priority)
+	public static Modifier<Number[]> addToArray(final int value,
+	                                            int priority)
 	{
 		return new AbstractModifier<Number[]>(0, NUMBER_ARR_CLASS, priority)
 		{
@@ -165,7 +165,7 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		return new PrivateSetNumber(NUMBER_CLASS, priority, value);
 	}
 
-	public static AbstractModifier<String> setString()
+	public static Modifier<String> setString()
 	{
 		return new AbstractModifier<String>(String.class)
 		{
@@ -183,8 +183,8 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		};
 	}
 
-	public static AbstractModifier<Number> multiply(final int value,
-		int priority)
+	public static Modifier<Number> multiply(final int value,
+	                                        int priority)
 	{
 		return new AbstractModifier<Number>(1, NUMBER_CLASS, priority)
 		{
@@ -202,7 +202,7 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		};
 	}
 
-	public static AbstractModifier<Number> add(final int value, int priority)
+	public static Modifier<Number> add(final int value, int priority)
 	{
 		return new AbstractModifier<Number>(2, NUMBER_CLASS, priority)
 		{
@@ -221,7 +221,7 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 	}
 
 
-	public static AbstractModifier<Number> add(final ComplexNEPFormula value, int priority)
+	public static Modifier<Number> add(final ComplexNEPFormula value, int priority)
 	{
 		return new AbstractModifier<Number>(2, NUMBER_CLASS, priority)
 		{

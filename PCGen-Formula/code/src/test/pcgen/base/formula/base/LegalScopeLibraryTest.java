@@ -13,8 +13,8 @@ public class LegalScopeLibraryTest extends TestCase
 
 	private LegalScopeLibrary library;
 	SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
-	SimpleLegalScope subScope = new SimpleLegalScope(globalScope, "SubScope");
-	SimpleLegalScope otherScope = new SimpleLegalScope(globalScope, "OtherScope");
+	LegalScope subScope = new SimpleLegalScope(globalScope, "SubScope");
+	LegalScope otherScope = new SimpleLegalScope(globalScope, "OtherScope");
 
 	@Override
 	protected void setUp() throws Exception

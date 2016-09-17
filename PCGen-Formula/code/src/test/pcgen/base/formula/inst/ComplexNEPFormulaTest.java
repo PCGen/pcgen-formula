@@ -12,6 +12,7 @@ import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.EvaluationManager;
 import pcgen.base.formula.base.FormulaManager;
 import pcgen.base.formula.base.FormulaSemantics;
+import pcgen.base.formula.base.LegalScope;
 import pcgen.base.formula.base.LegalScopeLibrary;
 import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VariableID;
@@ -66,7 +67,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		SplitFormulaSetup setup = new SplitFormulaSetup();
 		setup.loadBuiltIns();
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
-		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
+		LegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
 		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
 
@@ -132,7 +133,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		SplitFormulaSetup setup = new SplitFormulaSetup();
 		setup.loadBuiltIns();
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
-		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
+		LegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
 		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
 
@@ -240,7 +241,7 @@ public class ComplexNEPFormulaTest extends TestCase
 		SplitFormulaSetup setup = new SplitFormulaSetup();
 		setup.loadBuiltIns();
 		LegalScopeLibrary scopeLib = setup.getLegalScopeLibrary();
-		SimpleLegalScope globalScope = new SimpleLegalScope(null, "Global");
+		LegalScope globalScope = new SimpleLegalScope(null, "Global");
 		scopeLib.registerScope(globalScope);
 		IndividualSetup indSetup = new IndividualSetup(setup, "Global");
 
