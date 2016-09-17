@@ -24,7 +24,7 @@ public class SimpleNode implements Node
 {
 	private Node parent;
 	private Node[] children;
-	private int id;
+	private final int id;
 
 	private SimpleNode(int i)
 	{
