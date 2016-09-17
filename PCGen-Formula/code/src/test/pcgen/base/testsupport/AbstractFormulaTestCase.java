@@ -153,7 +153,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		StaticVisitor staticVisitor =
 				new StaticVisitor(localSetup.getFormulaManager().getLibrary());
 		boolean isStat =
-				((Boolean) staticVisitor.visit(node, null)).booleanValue();
+				((Boolean) staticVisitor.visit(node)).booleanValue();
 		if (isStat != b)
 		{
 			TestCase.fail("Expected Static (" + b + ") Formula: " + formula);
