@@ -60,7 +60,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 		setup = new SplitFormulaSetup();
 		setup.getLegalScopeLibrary()
 			.registerScope(new SimpleLegalScope(null, "Global"));
-		localSetup = new IndividualSetup(setup, "Global");
+		localSetup = new IndividualSetup(setup);
 		setup.getSolverFactory().addSolverFormat(Number.class, new Modifier(){
 
 			@Override
