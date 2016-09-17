@@ -141,9 +141,9 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		};
 	}
 
-	public static AbstractModifier<Number[]> setEmptyArray(int priority)
+	public static AbstractModifier<Number[]> setEmptyArray()
 	{
-		return new AbstractModifier<Number[]>(0, NUMBER_ARR_CLASS, priority)
+		return new AbstractModifier<Number[]>(0, NUMBER_ARR_CLASS, 0)
 		{
 			@Override
 			public Number[] process(EvaluationManager manager)

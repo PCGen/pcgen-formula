@@ -280,7 +280,7 @@ public class SolverTest extends TestCase
 	public void testArrayMod()
 	{
 		Solver<Number[]> solver =
-				new Solver<Number[]>(AbstractModifier.setEmptyArray(0), evalManager);
+				new Solver<Number[]>(AbstractModifier.setEmptyArray(), evalManager);
 		assertTrue(Arrays.equals(new Number[]{}, solver.process()));
 		Modifier<Number[]> add1 = AbstractModifier.addToArray(1, 10);
 		solver.addModifier(add1, this);
