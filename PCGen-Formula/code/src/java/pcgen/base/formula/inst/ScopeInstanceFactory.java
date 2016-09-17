@@ -41,18 +41,18 @@ public class ScopeInstanceFactory
 	 * to the instantiated "children" ScopeInstance objects within the provided
 	 * LegalScope.
 	 */
-	private DoubleKeyMapToList<ScopeInstance, LegalScope, ScopeInstance> scopeInstances = new DoubleKeyMapToList<>();
+	private final DoubleKeyMapToList<ScopeInstance, LegalScope, ScopeInstance> scopeInstances = new DoubleKeyMapToList<>();
 
 	/**
 	 * Contains a map from the owning VarScoped object to the ScopeInstance for
 	 * that object.
 	 */
-	private Map<VarScoped, ScopeInstance> objectToInstanceCache = new HashMap<>();
+	private final Map<VarScoped, ScopeInstance> objectToInstanceCache = new HashMap<>();
 
 	/**
 	 * Contains a map from a format to the global ScopeInstance for that format.
 	 */
-	private Map<String, ScopeInstance> globals = new HashMap<>();
+	private final Map<String, ScopeInstance> globals = new HashMap<>();
 
 	/**
 	 * The LegalScopeLibrary used to indicate the LegalScope objects for this

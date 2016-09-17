@@ -416,7 +416,7 @@ class AggressiveSolverManager
 		}
 	}
 
-	private Stack<VariableID<?>> varStack = new Stack<>();
+	private final Stack<VariableID<?>> varStack = new Stack<>();
 
 	/**
 	 * Processes a single Solver represented by the given VariableID. Returns
