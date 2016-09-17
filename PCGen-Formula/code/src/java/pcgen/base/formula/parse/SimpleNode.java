@@ -25,7 +25,6 @@ public class SimpleNode implements Node
 	private Node parent;
 	private Node[] children;
 	private int id;
-	private FormulaParser parser;
 
 	public SimpleNode(int i)
 	{
@@ -35,7 +34,7 @@ public class SimpleNode implements Node
 	public SimpleNode(FormulaParser p, int i)
 	{
 		this(i);
-		parser = p;
+		FormulaParser parser = p;
 	}
 
 	public void jjtOpen()
