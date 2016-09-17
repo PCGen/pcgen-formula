@@ -43,7 +43,6 @@ public class SimpleVariableStoreTest extends TestCase
 	public void testNulls()
 	{
 		WriteableVariableStore varStore = new SimpleVariableStore();
-		NumberManager numberManager = new NumberManager();
 		ScopeInstance globalInst = instanceFactory.getGlobalInstance("Global");
 		try
 		{
@@ -54,6 +53,7 @@ public class SimpleVariableStoreTest extends TestCase
 		{
 			//yep
 		}
+		NumberManager numberManager = new NumberManager();
 		VariableID<Number> vid = new VariableID<>(globalInst, numberManager, "test");
 		try
 		{
@@ -92,10 +92,10 @@ public class SimpleVariableStoreTest extends TestCase
 
 	public void testIndependence()
 	{
-		NumberManager numberManager = new NumberManager();
 		ScopeInstance globalInst = instanceFactory.getGlobalInstance("Global");
 		library.registerScope(new SimpleLegalScope(null, "Global2"));
 		ScopeInstance globalInst2 = instanceFactory.getGlobalInstance("Global2");
+		NumberManager numberManager = new NumberManager();
 		VariableID vid1 = new VariableID(globalInst, numberManager, "test");
 		SimpleVariableStore varStore = new SimpleVariableStore();
 		assertNull(varStore.put(vid1, Integer.valueOf(9)));
