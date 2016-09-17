@@ -221,7 +221,7 @@ public class EvaluateVisitor implements FormulaParserVisitor
 		else if (argNode instanceof ASTPCGenBracket)
 		{
 			int index = (Integer) visit((SimpleNode) args[0], data);
-			return Array.get(visitVariable(name, manager), index);
+			return Array.get(EvaluateVisitor.visitVariable(name, manager), index);
 		}
 		throw new IllegalStateException("Invalid Formula (unrecognized node: "
 			+ argNode + ")");
