@@ -251,7 +251,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		evaluatesTo(formula, node, Integer.valueOf(3));
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(3, vars.size());
-		Set<String> set = new HashSet<String>();
+		Set<String> set = new HashSet<>();
 		set.add("a");
 		set.add("b");
 		set.add("c");

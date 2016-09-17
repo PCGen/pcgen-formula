@@ -39,8 +39,7 @@ public class SimpleFunctionLibrary implements FunctionLibrary
 	 * 
 	 * These are () functions for world-wide clarity :D
 	 */
-	private final CaseInsensitiveMap<Function> parenMap =
-			new CaseInsensitiveMap<Function>();
+	private final CaseInsensitiveMap<Function> parenMap = new CaseInsensitiveMap<>();
 
 	/**
 	 * Adds a "paren" function to the SimpleFunctionLibrary.

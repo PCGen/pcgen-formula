@@ -30,8 +30,7 @@ public class ArgumentDependencyManager
 	 * A TypedKey for use (in a MappedDeque) for storing an
 	 * ArgumentDependencyManager
 	 */
-	public static final TypedKey<ArgumentDependencyManager> KEY =
-			new TypedKey<ArgumentDependencyManager>();
+	public static final TypedKey<ArgumentDependencyManager> KEY = new TypedKey<>();
 
 	/**
 	 * The maximum argument number encountered by this

@@ -33,28 +33,25 @@ import pcgen.base.util.MappedDeque;
 public class DependencyManager extends MappedDeque
 {
 
-	private static final TypedKey<ArrayList<VariableID<?>>> VARIABLES =
-			new TypedKey<ArrayList<VariableID<?>>>();
+	private static final TypedKey<ArrayList<VariableID<?>>> VARIABLES = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the FormulaManager contained in this
 	 * DependencyManager
 	 */
-	public static final TypedKey<FormulaManager> FMANAGER =
-			new TypedKey<FormulaManager>();
+	public static final TypedKey<FormulaManager> FMANAGER = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the ScopeInstance contained in this
 	 * DependencyManager
 	 */
-	public static final TypedKey<ScopeInstance> INSTANCE =
-			new TypedKey<ScopeInstance>();
+	public static final TypedKey<ScopeInstance> INSTANCE = new TypedKey<>();
 
 	/**
 	 * A TypedKey used for storing the Format currently asserted for the formula
 	 * served by this DependencyManager
 	 */
-	public static final TypedKey<Class<?>> ASSERTED = new TypedKey<Class<?>>();
+	public static final TypedKey<Class<?>> ASSERTED = new TypedKey<>();
 
 	/**
 	 * Adds a Variable (identified by the VariableID) to the list of
