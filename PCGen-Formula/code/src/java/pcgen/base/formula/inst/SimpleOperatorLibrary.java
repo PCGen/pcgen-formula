@@ -25,6 +25,7 @@ import pcgen.base.formula.base.UnaryAction;
 import pcgen.base.formula.parse.Operator;
 import pcgen.base.util.FormatManager;
 import pcgen.base.util.HashMapToList;
+import pcgen.base.util.MapToList;
 
 /**
  * SimpleOperatorLibrary is a simple implementation of the OperatorLibrary
@@ -37,13 +38,13 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 	 * HashMapToList from the Operators to the available OperatorActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, OperatorAction> operatorMTL = new HashMapToList<>();
+	private final MapToList<Operator, OperatorAction> operatorMTL = new HashMapToList<>();
 
 	/**
 	 * HashMapToList from the Operators to the available UnaryActions for the
 	 * Operator.
 	 */
-	private final HashMapToList<Operator, UnaryAction> unaryMTL = new HashMapToList<>();
+	private final MapToList<Operator, UnaryAction> unaryMTL = new HashMapToList<>();
 
 	@Override
 	public void addAction(OperatorAction action)
