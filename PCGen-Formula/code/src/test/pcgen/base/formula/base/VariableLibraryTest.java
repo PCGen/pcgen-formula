@@ -32,7 +32,7 @@ import org.junit.Test;
 public class VariableLibraryTest extends TestCase
 {
 
-	private NumberManager numberManager = FormatUtilities.NUMBER_MANAGER;
+	private final NumberManager numberManager = FormatUtilities.NUMBER_MANAGER;
 	private ScopeInstanceFactory instanceFactory;
 	private LegalScopeLibrary varScopeLib;
 	private VariableLibrary varLib;
