@@ -34,7 +34,6 @@ public class SimpleNode implements Node
 	public SimpleNode(FormulaParser p, int i)
 	{
 		this(i);
-		FormulaParser parser = p;
 	}
 
 	public void jjtOpen()
