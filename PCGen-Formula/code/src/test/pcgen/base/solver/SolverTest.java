@@ -20,13 +20,12 @@ package pcgen.base.solver;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import pcgen.base.formula.base.EvaluationManager;
 import pcgen.base.formula.inst.SimpleLegalScope;
 import pcgen.base.solver.testsupport.AbstractModifier;
+
+import junit.framework.TestCase;
+import org.junit.Test;
 
 public class SolverTest extends TestCase
 {
@@ -281,7 +280,7 @@ public class SolverTest extends TestCase
 	public void testArrayMod()
 	{
 		Solver<Number[]> solver =
-				new Solver<Number[]>(AbstractModifier.setEmptyArray(0), evalManager);
+				new Solver<Number[]>(AbstractModifier.setEmptyArray(), evalManager);
 		assertTrue(Arrays.equals(new Number[]{}, solver.process()));
 		Modifier<Number[]> add1 = AbstractModifier.addToArray(1, 10);
 		solver.addModifier(add1, this);

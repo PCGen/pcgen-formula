@@ -42,7 +42,7 @@ public class ValueFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "value(3)";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isNotValid(formula, node, numberManager, null);
+		isNotValid(formula, node, numberManager);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class ValueFunctionTest extends AbstractFormulaTestCase
 	{
 		String formula = "value()";
 		SimpleNode node = TestUtilities.doParse(formula);
-		isValid(formula, node, numberManager, null);
+		isValid(formula, node, numberManager);
 		isStatic(formula, node, false);
 		EvaluationManager manager = generateManager();
 		manager.push(EvaluationManager.INPUT, 1);
