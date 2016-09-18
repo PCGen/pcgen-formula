@@ -19,9 +19,6 @@ package pcgen.base.formula.function;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import org.junit.Test;
 
 import pcgen.base.formatmanager.FormatUtilities;
 import pcgen.base.formula.base.OperatorLibrary;
@@ -35,7 +32,8 @@ import pcgen.base.formula.parse.SimpleNode;
 import pcgen.base.formula.visitor.ReconstructionVisitor;
 import pcgen.base.testsupport.AbstractFormulaTestCase;
 import pcgen.base.testsupport.TestUtilities;
-import pcgen.base.util.FormatManager;
+
+import org.junit.Test;
 
 public class IfFunctionTest extends AbstractFormulaTestCase
 {
