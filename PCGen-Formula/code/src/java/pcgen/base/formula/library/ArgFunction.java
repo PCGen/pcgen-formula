@@ -76,7 +76,7 @@ public class ArgFunction implements Function
 	{
 		ASTNum node = (ASTNum) args[0];
 		int argNum = Integer.parseInt(node.getText());
-		return (Boolean) visitor.visit((SimpleNode) masterArgs[argNum], null);
+		return (Boolean) visitor.visit((SimpleNode) masterArgs[argNum]);
 	}
 
 	/**
