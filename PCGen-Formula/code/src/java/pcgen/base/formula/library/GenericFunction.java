@@ -174,7 +174,7 @@ public class GenericFunction implements Function
 	{
 		FunctionLibrary argLibrary = new ArgWrappingLibrary(visitor.getLibrary(), args);
 		StaticVisitor subVisitor = new StaticVisitor(argLibrary);
-		return (Boolean) subVisitor.visit(root, null);
+		return (Boolean) subVisitor.visit(root);
 	}
 
 	/**
