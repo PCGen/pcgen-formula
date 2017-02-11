@@ -54,7 +54,7 @@ public class ArrayComponentModifierTest extends AbstractFormulaTestCase
 	public void testGetUserPriority()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
+		Modifier acm = new ArrayComponentModifier(5, cm);
 		assertEquals((100L << 32), acm.getPriority());
 	}
 
@@ -62,7 +62,7 @@ public class ArrayComponentModifierTest extends AbstractFormulaTestCase
 	public void testGetVariableFormat()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
+		Modifier acm = new ArrayComponentModifier(5, cm);
 		assertEquals(Number[].class, acm.getVariableFormat());
 	}
 
@@ -70,7 +70,7 @@ public class ArrayComponentModifierTest extends AbstractFormulaTestCase
 	public void testGetIdentification()
 	{
 		Modifier cm = AbstractModifier.setNumber(3, 100);
-		ArrayComponentModifier acm = new ArrayComponentModifier(5, cm);
+		Modifier acm = new ArrayComponentModifier(5, cm);
 		assertEquals("Set (component)", acm.getIdentification());
 	}
 

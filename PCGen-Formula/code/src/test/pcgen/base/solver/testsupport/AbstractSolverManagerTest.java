@@ -178,7 +178,7 @@ public abstract class AbstractSolverManagerTest extends AbstractFormulaTestCase
 		getManager().addModifier(hitpoints, modifier, source);
 		assertEquals(6, store.get(hitpoints));
 
-		SimpleLegalScope localScope = new SimpleLegalScope(globalScope, "STAT");
+		LegalScope localScope = new SimpleLegalScope(globalScope, "STAT");
 		getScopeLibrary().registerScope(localScope);
 		ScopeInstance strInst = getInstanceFactory().get("STAT", new MockStat("Strength"));
 
