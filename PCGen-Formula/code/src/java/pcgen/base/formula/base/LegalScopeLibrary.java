@@ -19,11 +19,13 @@ package pcgen.base.formula.base;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
 import pcgen.base.util.CaseInsensitiveMap;
 import pcgen.base.util.HashMapToList;
+import pcgen.base.util.MapToList;
 
 /**
  * A LegalScopeLibrary is a storage location for LegalScope used to track the
@@ -41,7 +43,7 @@ public class LegalScopeLibrary
 	/**
 	 * The Map of LegalScope objects to their list of child LegalScope objects.
 	 */
-	private HashMapToList<LegalScope, LegalScope> scopeChildren =
+	private MapToList<LegalScope, LegalScope> scopeChildren =
 			new HashMapToList<LegalScope, LegalScope>();
 
 	/**
@@ -49,7 +51,7 @@ public class LegalScopeLibrary
 	 * that this is distinct from the keys of scopeChildren, since only parents
 	 * are loaded as keys.
 	 */
-	private CaseInsensitiveMap<LegalScope> scopes =
+	private HashMap scopes =
 			new CaseInsensitiveMap<LegalScope>();
 
 	/**

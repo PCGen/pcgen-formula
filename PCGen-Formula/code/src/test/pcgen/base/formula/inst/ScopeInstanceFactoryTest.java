@@ -20,6 +20,8 @@ package pcgen.base.formula.inst;
 import org.junit.Test;
 
 import junit.framework.TestCase;
+
+import pcgen.base.formula.base.LegalScope;
 import pcgen.base.formula.base.LegalScopeLibrary;
 import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.formula.base.VarScoped;
@@ -126,9 +128,9 @@ public class ScopeInstanceFactoryTest extends TestCase
 		assertTrue(scopeInst.equals(lsi.getParentScope()));
 		assertEquals("Local", lsi.getLegalScope().getName());
 
-		SimpleLegalScope sublocal = new SimpleLegalScope(local, "SubLocal");
+		LegalScope sublocal = new SimpleLegalScope(local, "SubLocal");
 		library.registerScope(sublocal);
-		Scoped slvs = new Scoped("SVar", "SubLocal", lvs);
+		VarScoped slvs = new Scoped("SVar", "SubLocal", lvs);
 		ScopeInstance slsi = factory.get("Local", slvs);
 		assertTrue(local.equals(slsi.getLegalScope()));
 		assertTrue(scopeInst.equals(slsi.getParentScope()));

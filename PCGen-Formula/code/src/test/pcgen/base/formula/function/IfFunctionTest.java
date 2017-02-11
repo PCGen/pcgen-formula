@@ -17,6 +17,7 @@
  */
 package pcgen.base.formula.function;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -234,7 +235,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		evaluatesTo(formula, node, Integer.valueOf(3));
 		List<VariableID<?>> vars = getVariables(node);
 		assertEquals(3, vars.size());
-		Set<String> set = new HashSet<String>();
+		Collection<String> set = new HashSet<String>();
 		set.add("a");
 		set.add("b");
 		set.add("c");

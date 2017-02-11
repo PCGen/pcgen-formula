@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.inst;
 
+import pcgen.base.formula.base.ScopeInstance;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -92,7 +94,7 @@ public class SimpleScopeInstanceTest extends TestCase
 		{
 			//ok
 		}
-		SimpleScopeInstance localInst = new SimpleScopeInstance(globalInst, local, LOCAL_VS);
+		ScopeInstance localInst = new SimpleScopeInstance(globalInst, local, LOCAL_VS);
 		assertEquals(globalInst, localInst.getParentScope());
 		assertEquals(local, localInst.getLegalScope());
 		try

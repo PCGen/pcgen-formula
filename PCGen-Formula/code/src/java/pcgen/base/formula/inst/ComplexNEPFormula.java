@@ -24,6 +24,7 @@ import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.EvaluationManager;
 import pcgen.base.formula.base.FormulaSemantics;
 import pcgen.base.formula.parse.FormulaParser;
+import pcgen.base.formula.parse.FormulaParserVisitor;
 import pcgen.base.formula.parse.ParseException;
 import pcgen.base.formula.parse.SimpleNode;
 import pcgen.base.formula.visitor.DependencyVisitor;
@@ -50,10 +51,10 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	private static final SemanticsVisitor SEMANTICS_VISITOR =
 			new SemanticsVisitor();
 
-	private static final DependencyVisitor DEPENDENCY_VISITOR =
+	private static final FormulaParserVisitor DEPENDENCY_VISITOR =
 			new DependencyVisitor();
 
-	private static final ReconstructionVisitor RECONSTRUCTION_VISITOR =
+	private static final FormulaParserVisitor RECONSTRUCTION_VISITOR =
 			new ReconstructionVisitor();
 
 	private static final EvaluateVisitor EVALUATE_VISITOR =
@@ -176,7 +177,7 @@ public class ComplexNEPFormula<T> implements NEPFormula<T>
 	@Override
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
+		CharSequence sb = new StringBuilder();
 		RECONSTRUCTION_VISITOR.visit(root, sb);
 		return sb.toString();
 	}

@@ -34,6 +34,7 @@ import pcgen.base.formula.base.VariableID;
 import pcgen.base.formula.base.VariableLibrary;
 import pcgen.base.formula.base.WriteableVariableStore;
 import pcgen.base.formula.inst.ScopeInstanceFactory;
+import pcgen.base.graph.base.Graph;
 import pcgen.base.graph.inst.DefaultDirectionalGraphEdge;
 import pcgen.base.graph.inst.DirectionalSetMapGraph;
 import pcgen.base.util.FormatManager;
@@ -81,7 +82,8 @@ public class DynamicSolverManager implements SolverManager
 	 * a 1:1 relationship with the Solver used for a VariableID, this implicitly stores
 	 * the dependencies between the Solvers that are part of this DynamicSolverManager.
 	 */
-	private final DirectionalSetMapGraph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>> dependencies =
+	private final Graph<VariableID<?>, DefaultDirectionalGraphEdge<VariableID<?>>>
+			dependencies =
 			new DirectionalSetMapGraph<>();
 
 	/**
@@ -90,7 +92,7 @@ public class DynamicSolverManager implements SolverManager
 	 * the "dynamic" DefaultDirectionalGraphEdge that was injected into the dependency
 	 * graph (graph).
 	 */
-	private final DirectionalSetMapGraph<Object, DynamicEdge> dynamic =
+	private final Graph<Object, DynamicEdge> dynamic =
 			new DirectionalSetMapGraph<>();
 
 	/**
