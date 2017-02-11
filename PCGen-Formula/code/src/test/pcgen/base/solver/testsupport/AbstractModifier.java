@@ -111,8 +111,8 @@ public abstract class AbstractModifier<T> implements Modifier<T>
 		if (o instanceof AbstractModifier)
 		{
 			AbstractModifier am = (AbstractModifier) o;
-			return format.equals(am.format) && inherent == am.inherent
-				&& priority == am.priority;
+			return format.equals(am.format) && (inherent == am.inherent)
+					&& (priority == am.priority);
 		}
 		return false;
 	}

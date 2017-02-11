@@ -54,7 +54,7 @@ public enum Operator
 
 	private String symbol;
 
-	private Operator(String op)
+	Operator(String op)
 	{
 		symbol = op;
 	}
