@@ -38,6 +38,7 @@ import pcgen.base.formula.base.WriteableVariableStore;
 import pcgen.base.formula.inst.ScopeInstanceFactory;
 import pcgen.base.formula.inst.SimpleLegalScope;
 import pcgen.base.formula.inst.SimpleVariableStore;
+import pcgen.base.formula.parse.FormulaParserVisitor;
 import pcgen.base.formula.parse.SimpleNode;
 import pcgen.base.formula.visitor.DependencyVisitor;
 import pcgen.base.formula.visitor.EvaluateVisitor;
@@ -144,7 +145,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 	public void isValid(String formula, SimpleNode node,
 		FormatManager<?> formatManager, Class<?> assertedFormat)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = managerFactory.generateFormulaSemantics(
 			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
 		semanticsVisitor.visit(node, semantics);
@@ -218,7 +219,7 @@ public abstract class AbstractFormulaTestCase extends TestCase
 	protected void isNotValid(String formula, SimpleNode node,
 		FormatManager<?> formatManager, Class<?> assertedFormat)
 	{
-		SemanticsVisitor semanticsVisitor = new SemanticsVisitor();
+		FormulaParserVisitor semanticsVisitor = new SemanticsVisitor();
 		FormulaSemantics semantics = managerFactory.generateFormulaSemantics(
 			localSetup.getFormulaManager(), getGlobalScope(), assertedFormat);
 		semanticsVisitor.visit(node, semantics);

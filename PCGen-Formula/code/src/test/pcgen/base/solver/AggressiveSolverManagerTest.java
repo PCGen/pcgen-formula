@@ -115,7 +115,7 @@ public class AggressiveSolverManagerTest extends AbstractSolverManagerTest
 		manager.createChannel(str);
 		assertEquals(0, store.get(str));
 		
-		SimpleLegalScope localScope = new SimpleLegalScope(globalScope, "STAT");
+		LegalScope localScope = new SimpleLegalScope(globalScope, "STAT");
 		getScopeLibrary().registerScope(localScope);
 
 		ScopeInstance strInst = getInstanceFactory().get("STAT", new MockStat("Strength"));

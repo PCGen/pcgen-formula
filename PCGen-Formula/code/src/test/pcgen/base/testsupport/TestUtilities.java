@@ -49,7 +49,7 @@ public final class TestUtilities
 
 	public static final double SMALL_ERROR = Math.pow(10, -10);
 
-	public static boolean doubleEqual(double d1, double d2, double delta)
+	static boolean doubleEqual(double d1, double d2, double delta)
 	{
 		if (delta < 0)
 		{

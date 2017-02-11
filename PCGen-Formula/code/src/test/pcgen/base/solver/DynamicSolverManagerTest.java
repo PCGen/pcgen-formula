@@ -15,6 +15,8 @@
  */
 package pcgen.base.solver;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import pcgen.base.formula.base.DependencyManager;
@@ -162,7 +164,7 @@ public class DynamicSolverManagerTest extends AbstractSolverManagerTest
 		getFunctionLibrary().addFunction(new Dynamic());
 		LegalScope globalScope = getGlobalScope();
 
-		SimpleLegalScope limbScope = new SimpleLegalScope(globalScope, "LIMB");
+		LegalScope limbScope = new SimpleLegalScope(globalScope, "LIMB");
 		getScopeLibrary().registerScope(limbScope);
 		getVarLibrary().assertLegalVariableID("active", globalScope, limbManager);
 		getVarLibrary().assertLegalVariableID("quantity", limbScope, numberManager);
@@ -227,7 +229,7 @@ public class DynamicSolverManagerTest extends AbstractSolverManagerTest
 	public class LimbManager implements FormatManager<Limb>
 	{
 
-		private CaseInsensitiveMap<Limb> set = new CaseInsensitiveMap<Limb>();
+		private HashMap set = new CaseInsensitiveMap<Limb>();
 
 		@Override
 		public Limb convert(String inputStr)
@@ -382,7 +384,7 @@ public class DynamicSolverManagerTest extends AbstractSolverManagerTest
 		ScopeInstance source = getGlobalScopeInst();
 		LegalScope globalScope = getGlobalScope();
 
-		SimpleLegalScope limbScope = new SimpleLegalScope(globalScope, "LIMB");
+		LegalScope limbScope = new SimpleLegalScope(globalScope, "LIMB");
 		getScopeLibrary().registerScope(limbScope);
 
 		getVarLibrary().assertLegalVariableID("LocalVar", limbScope, numberManager);
