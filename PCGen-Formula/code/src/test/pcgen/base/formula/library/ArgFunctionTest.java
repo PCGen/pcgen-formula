@@ -23,6 +23,7 @@ import pcgen.base.formula.analysis.ArgumentDependencyManager;
 import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.FunctionLibrary;
 import pcgen.base.formula.parse.ASTNum;
+import pcgen.base.formula.parse.FormulaParserVisitor;
 import pcgen.base.formula.parse.Node;
 import pcgen.base.formula.parse.SimpleNode;
 import pcgen.base.formula.visitor.DependencyVisitor;
@@ -156,7 +157,7 @@ public class ArgFunctionTest extends AbstractFormulaTestCase
 		 * passed in - it should NOT contain an ArgumentDependencyManager
 		 */
 		assertTrue(fdm.get(ArgumentDependencyManager.KEY) == null);
-		DependencyVisitor dv = new DependencyVisitor();
+		FormulaParserVisitor dv = new DependencyVisitor();
 		dv.visit(node, fdm);
 	}
 

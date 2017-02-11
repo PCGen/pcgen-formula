@@ -31,7 +31,7 @@ public class DynamicManager
 	 * The List of DynamicDependency objects for the formula managed by this
 	 * DynamicManager.
 	 */
-	private final List<DynamicDependency> dependencies = new ArrayList<>();
+	private final Collection<DynamicDependency> dependencies = new ArrayList<>();
 
 	/**
 	 * Adds a new DynamicDependency to the List of dynamic dependencies in this
@@ -50,7 +50,7 @@ public class DynamicManager
 	 * 
 	 * @return a Collection of DynamicDependency objects contained by this DynamicManager
 	 */
-	public Collection<DynamicDependency> getDependencies()
+	public Iterable<DynamicDependency> getDependencies()
 	{
 		return Collections.unmodifiableCollection(dependencies);
 	}

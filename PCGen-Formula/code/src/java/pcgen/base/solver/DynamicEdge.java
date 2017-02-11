@@ -25,6 +25,7 @@ import pcgen.base.formula.base.VariableID;
 import pcgen.base.formula.base.VariableLibrary;
 import pcgen.base.formula.inst.ScopeInstanceFactory;
 import pcgen.base.graph.base.DirectionalEdge;
+import pcgen.base.graph.base.Edge;
 import pcgen.base.graph.inst.DefaultDirectionalGraphEdge;
 import pcgen.base.graph.inst.DefaultGraphEdge;
 
@@ -66,7 +67,7 @@ public class DynamicEdge extends DefaultGraphEdge<Object>
 	 *            original dependency
 	 */
 	public DynamicEdge(VariableID<?> source,
-		DefaultDirectionalGraphEdge<VariableID<?>> targetEdge, DynamicDependency dd)
+	                   Edge<VariableID<?>> targetEdge, DynamicDependency dd)
 	{
 		super(source, targetEdge);
 		varName = targetEdge.getNodeAt(0).getName();

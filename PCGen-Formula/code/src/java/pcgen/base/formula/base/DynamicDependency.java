@@ -16,6 +16,7 @@
 package pcgen.base.formula.base;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +45,7 @@ public class DynamicDependency implements VariableStrategy
 	 * The source variable name for the dynamic dependency. Stored as the variable name
 	 * since the actual VariableID is relative to the value of controlVar.
 	 */
-	private final List<String> sourceVarNames = new ArrayList<>();
+	private final Collection<String> sourceVarNames = new ArrayList<>();
 
 	/**
 	 * The source scope name for the dynamic dependency.

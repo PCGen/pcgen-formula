@@ -25,6 +25,7 @@ import pcgen.base.formula.base.EvaluationManager;
 import pcgen.base.formula.base.Identified;
 import pcgen.base.formula.base.ScopeInstance;
 import pcgen.base.util.HashMapToList;
+import pcgen.base.util.MapToList;
 import pcgen.base.util.TreeMapToList;
 
 /**
@@ -62,7 +63,7 @@ public class Solver<T>
 	 * The list of Modifiers for this Solver. This is maintained as an ordered
 	 * list: TreeMap sorts the Modifiers by their priority.
 	 */
-	private final TreeMapToList<Long, ModInfo<T>> modifierList =
+	private final MapToList<Long, ModInfo<T>> modifierList =
 			new TreeMapToList<Long, ModInfo<T>>();
 
 	/**
@@ -70,7 +71,7 @@ public class Solver<T>
 	 * for tracing responsibility for modification as well as allowing a
 	 * "global remove" of Modifiers from a given source.
 	 */
-	private final HashMapToList<Object, Modifier<T>> sourceList =
+	private final MapToList<Object, Modifier<T>> sourceList =
 			new HashMapToList<Object, Modifier<T>>();
 
 	/**
