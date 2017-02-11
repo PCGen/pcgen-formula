@@ -175,7 +175,7 @@ public class FormulaSemantics
 	 * beyond that point... this needs to be shared among all of those children, so it has
 	 * to be a separate item and internal to the first FormulaSemantics (pre-made)
 	 */
-	private class SemanticsReport
+	private static class SemanticsReport
 	{
 		private boolean isValid = true;
 		private String report = "";

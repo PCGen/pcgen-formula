@@ -244,7 +244,7 @@ public class Solver<T>
 	/**
 	 * Carries the Default Value information for display in diagnosis
 	 */
-	private final class DefaultValue implements Identified
+	private static final class DefaultValue implements Identified
 	{
 		/**
 		 * The format name of the format that this DefaultValue is representing
