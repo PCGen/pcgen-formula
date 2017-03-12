@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.visitor;
 
+import java.util.stream.IntStream;
+
 import pcgen.base.formula.parse.ASTArithmetic;
 import pcgen.base.formula.parse.ASTEquality;
 import pcgen.base.formula.parse.ASTExpon;
@@ -294,11 +296,10 @@ public class ReconstructionVisitor implements FormulaParserVisitor
 	private Object processChildren(SimpleNode node, Object data)
 	{
 		int numberOfChildren = node.jjtGetNumChildren();
-		for (int i = 0; i < numberOfChildren; i++)
-		{
-			Node child = node.jjtGetChild(i);
-			child.jjtAccept(this, data);
-		}
+		IntStream.range(0, numberOfChildren).<Node>mapToObj(i -> node.jjtGetChild(i)).forEach(child -> child.jjtAccept(
+				this,
+				data
+		));
 		return data;
 	}
 

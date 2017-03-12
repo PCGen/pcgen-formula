@@ -127,13 +127,11 @@ public abstract class AbstractNaryFunction implements Function
 	@Override
 	public Boolean isStatic(StaticVisitor visitor, Node[] args)
 	{
-		for (Node n : args)
+		if (Arrays.stream(args)
+		          .map(n -> (Boolean) n.jjtAccept(visitor, null))
+		          .anyMatch(result -> !result.booleanValue()))
 		{
-			Boolean result = (Boolean) n.jjtAccept(visitor, null);
-			if (!result.booleanValue())
-			{
-				return Boolean.FALSE;
-			}
+			return Boolean.FALSE;
 		}
 		return Boolean.TRUE;
 	}

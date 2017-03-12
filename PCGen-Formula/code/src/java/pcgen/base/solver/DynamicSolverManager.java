@@ -215,16 +215,13 @@ public class DynamicSolverManager implements SolverManager
 			}
 			List<VariableID<?>> inputs = dep.generateSources(formulaManager.getFactory(),
 				formulaManager.getScopeInstanceFactory(), vs);
-			for (VariableID<?> input : inputs)
+			inputs.stream().map(input -> new DefaultDirectionalGraphEdge<>(input, varID)).forEach(edge ->
 			{
-				@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-				DefaultDirectionalGraphEdge<VariableID<?>> edge =
-						new DefaultDirectionalGraphEdge<>(input, varID);
 				dependencies.addEdge(edge);
 				@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 				DynamicEdge de = new DynamicEdge(controlVar, edge, dep);
 				dynamic.addEdge(de);
-			}
+			});
 		}
 	}
 
@@ -314,14 +311,11 @@ public class DynamicSolverManager implements SolverManager
 		for (DynamicDependency dep : dd.getDependencies())
 		{
 			VariableID<?> controlVar = dep.getControlVar();
-			for (DynamicEdge edge : dynamic.getAdjacentEdges(controlVar))
+			dynamic.getAdjacentEdges(controlVar).stream().filter(edge -> edge.isDependency(dep)).forEach(edge ->
 			{
-				if (edge.isDependency(dep))
-				{
-					dependencies.removeEdge(edge.getTargetEdge());
-					dynamic.removeEdge(edge);
-				}
-			}
+				dependencies.removeEdge(edge.getTargetEdge());
+				dynamic.removeEdge(edge);
+			});
 		}
 		List<VariableID<?>> deps = dm.getVariables();
 		if (deps == null)
@@ -330,18 +324,15 @@ public class DynamicSolverManager implements SolverManager
 		}
 		Set<DefaultDirectionalGraphEdge<VariableID<?>>> edges =
 				dependencies.getAdjacentEdges(varID);
-		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : edges)
+		edges.stream().filter(edge -> edge.getNodeAt(1) == varID).forEach(edge ->
 		{
-			if (edge.getNodeAt(1) == varID)
+			VariableID<?> depID = edge.getNodeAt(0);
+			if (deps.contains(depID))
 			{
-				VariableID<?> depID = edge.getNodeAt(0);
-				if (deps.contains(depID))
-				{
-					dependencies.removeEdge(edge);
-					deps.remove(depID);
-				}
+				dependencies.removeEdge(edge);
+				deps.remove(depID);
 			}
-		}
+		});
 		if (!deps.isEmpty())
 		{
 			/*
@@ -423,13 +414,10 @@ public class DynamicSolverManager implements SolverManager
 				dependencies.getAdjacentEdges(varID);
 		if (adjacentEdges != null)
 		{
-			for (DefaultDirectionalGraphEdge<VariableID<?>> edge : adjacentEdges)
-			{
-				if (edge.getNodeAt(0).equals(varID))
-				{
-					solveFromNode(edge.getNodeAt(1));
-				}
-			}
+			adjacentEdges.stream()
+			             .filter(edge -> edge.getNodeAt(0).equals(varID))
+			             .map(edge -> edge.getNodeAt(1))
+			             .forEach(this::solveFromNode);
 		}
 	}
 

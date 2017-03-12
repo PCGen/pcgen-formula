@@ -161,13 +161,11 @@ public class IfFunction implements Function
 		 * used... but that is not a corner case we will spend time on right
 		 * now...
 		 */
-		for (Node n : args)
+		if (Arrays.stream(args)
+		          .map(n -> (Boolean) n.jjtAccept(visitor, null))
+		          .anyMatch(result -> !result.booleanValue()))
 		{
-			Boolean result = (Boolean) n.jjtAccept(visitor, null);
-			if (!result.booleanValue())
-			{
-				return Boolean.FALSE;
-			}
+			return Boolean.FALSE;
 		}
 		return Boolean.TRUE;
 	}

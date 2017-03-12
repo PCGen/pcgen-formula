@@ -17,6 +17,8 @@
  */
 package pcgen.base.formula.visitor;
 
+import java.util.stream.IntStream;
+
 import pcgen.base.formula.parse.ASTArithmetic;
 import pcgen.base.formula.parse.ASTEquality;
 import pcgen.base.formula.parse.ASTExpon;
@@ -188,11 +190,10 @@ public class FullDumpVisitor implements FormulaParserVisitor
 		System.err.print(": ");
 		System.err.println(rvr);
 		int numChildren = node.jjtGetNumChildren();
-		for (int i = 0; i < numChildren; i++)
-		{
-			Node child = node.jjtGetChild(i);
-			child.jjtAccept(this, data + " ");
-		}
+		IntStream.range(0, numChildren).<Node>mapToObj(i -> node.jjtGetChild(i)).forEach(child -> child.jjtAccept(
+				this,
+				data + " "
+		));
 		return null;
 	}
 }

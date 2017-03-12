@@ -18,6 +18,7 @@
 package pcgen.base.formula.inst;
 
 import java.util.List;
+import java.util.Objects;
 
 import pcgen.base.formula.base.OperatorAction;
 import pcgen.base.formula.base.OperatorLibrary;
@@ -89,19 +90,16 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 		List<UnaryAction> actionList = unaryMTL.getListFor(operator);
 		if (actionList != null)
 		{
-			for (UnaryAction action : actionList)
-			{
-				FormatManager<?> result = action.abstractEvaluate(format);
-				/*
-				 * null indicates the UnaryAction can't evaluate these, but try
-				 * another (don't unconditionally return result because another
-				 * UnaryAction might work)
-				 */
-				if (result != null)
-				{
-					return result;
-				}
-			}
+			/*
+			 * null indicates the UnaryAction can't evaluate these, but try
+			 * another (don't unconditionally return result because another
+			 * UnaryAction might work)
+			 */
+			return actionList.stream()
+			                 .map(action -> action.abstractEvaluate(format))
+			                 .filter(Objects::nonNull)
+			                 .findFirst()
+			                 .orElse(null);
 		}
 		return null;
 	}
@@ -139,20 +137,16 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 		List<OperatorAction> actionList = operatorMTL.getListFor(operator);
 		if (actionList != null)
 		{
-			for (OperatorAction action : actionList)
-			{
-				FormatManager<?> result =
-						action.abstractEvaluate(format1, format2);
-				/*
-				 * null indicates the OperatorAction can't evaluate these, but
-				 * try another (don't unconditionally return result because
-				 * another OperatorAction might work)
-				 */
-				if (result != null)
-				{
-					return result;
-				}
-			}
+			/*
+			 * null indicates the OperatorAction can't evaluate these, but
+			 * try another (don't unconditionally return result because
+			 * another OperatorAction might work)
+			 */
+			return actionList.stream()
+			                 .map(action -> action.abstractEvaluate(format1, format2))
+			                 .filter(Objects::nonNull)
+			                 .findFirst()
+			                 .orElse(null);
 		}
 		return null;
 	}
