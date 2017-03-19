@@ -266,18 +266,15 @@ public class AggressiveSolverManager implements SolverManager
 		}
 		Set<DefaultDirectionalGraphEdge<VariableID<?>>> edges =
 				dependencies.getAdjacentEdges(varID);
-		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : edges)
+		edges.stream().filter(edge -> edge.getNodeAt(1) == varID).forEach(edge ->
 		{
-			if (edge.getNodeAt(1) == varID)
+			VariableID<?> depID = edge.getNodeAt(0);
+			if (deps.contains(depID))
 			{
-				VariableID<?> depID = edge.getNodeAt(0);
-				if (deps.contains(depID))
-				{
-					dependencies.removeEdge(edge);
-					deps.remove(depID);
-				}
+				dependencies.removeEdge(edge);
+				deps.remove(depID);
 			}
-		}
+		});
 		if (!deps.isEmpty())
 		{
 			/*
@@ -329,13 +326,10 @@ public class AggressiveSolverManager implements SolverManager
 				dependencies.getAdjacentEdges(varID);
 		if (adjacentEdges != null)
 		{
-			for (DefaultDirectionalGraphEdge<VariableID<?>> edge : adjacentEdges)
-			{
-				if (edge.getNodeAt(0).equals(varID))
-				{
-					solveFromNode(edge.getNodeAt(1));
-				}
-			}
+			adjacentEdges.stream()
+			             .filter(edge -> edge.getNodeAt(0).equals(varID))
+			             .map(edge -> edge.getNodeAt(1))
+			             .forEach(this::solveFromNode);
 		}
 	}
 

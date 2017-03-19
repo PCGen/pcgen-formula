@@ -18,6 +18,7 @@
 package pcgen.base.formula.visitor;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import pcgen.base.formatmanager.FormatUtilities;
 import pcgen.base.formula.base.FormulaManager;
@@ -543,11 +544,7 @@ public class SemanticsVisitor implements FormulaParserVisitor
 	private String getInvalidCountReport(SimpleNode node, int expectedCount)
 	{
 		int argLength = node.jjtGetNumChildren();
-		Node[] args = new Node[argLength];
-		for (int i = 0; i < argLength; i++)
-		{
-			args[i] = node.jjtGetChild(i);
-		}
+		Node[] args = IntStream.range(0, argLength).<Node>mapToObj(i -> node.jjtGetChild(i)).toArray(Node[]::new);
 		return "Parse Error: Item of type " + node.getClass().getName()
 			+ " had incorrect children from parse. Expected " + expectedCount
 			+ " got " + args.length + " " + Arrays.asList(args);

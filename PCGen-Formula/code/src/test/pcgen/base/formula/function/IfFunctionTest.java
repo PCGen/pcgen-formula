@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import pcgen.base.formatmanager.FormatUtilities;
@@ -238,10 +239,7 @@ public class IfFunctionTest extends AbstractFormulaTestCase
 		set.add("a");
 		set.add("b");
 		set.add("c");
-		for (VariableID<?> vid: vars)
-		{
-			assertTrue(set.remove(vid.getName()));
-		}
+		vars.stream().map(vid -> set.remove(vid.getName())).forEach(TestCase::assertTrue);
 	}
 
 	@Test
