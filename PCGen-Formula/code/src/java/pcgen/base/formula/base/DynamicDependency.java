@@ -18,6 +18,7 @@ package pcgen.base.formula.base;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import pcgen.base.formula.inst.ScopeInstanceFactory;
 
@@ -92,12 +93,9 @@ public class DynamicDependency implements VariableStrategy
 		ScopeInstanceFactory siFactory, VarScoped sourceObject)
 	{
 		ScopeInstance scopeInst = siFactory.get(sourceScopeName, sourceObject);
-		List<VariableID<?>> list = new ArrayList<>();
-		for (String sourceVarName : sourceVarNames)
-		{
-			list.add(varLibrary.getVariableID(scopeInst, sourceVarName));
-		}
-		return list;
+		return sourceVarNames.stream()
+							 .map(name -> varLibrary.getVariableID(scopeInst, name))
+							 .collect(Collectors.toList());
 	}
 
 	/**

@@ -20,6 +20,9 @@
 
 package pcgen.base.formula.parse;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class SimpleNode implements Node
 {
 	private Node parent;
@@ -180,5 +183,10 @@ public class SimpleNode implements Node
 	public String getText()
 	{
 		return text;
+	}
+
+	public Stream<Node> getChildStream()
+	{
+		return Arrays.stream(children);
 	}
 }

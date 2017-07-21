@@ -318,20 +318,10 @@ public class StaticVisitor implements FormulaParserVisitor
 	 *            if each is static
 	 * @return TRUE if all children of this node are static; FALSE otherwise
 	 */
-	private Object checkAllChildren(Node node)
+	private Object checkAllChildren(SimpleNode node)
 	{
-		int childCount = node.jjtGetNumChildren();
-		for (int i = 0; i < childCount; i++)
-		{
-			Node child = node.jjtGetChild(i);
-			Boolean result = (Boolean) child.jjtAccept(this, null);
-			//Fail fast, per implementation note above
-			if (!result.booleanValue())
-			{
-				return Boolean.FALSE;
-			}
-		}
-		return Boolean.TRUE;
+		return node.getChildStream()
+				   .allMatch(child -> (Boolean) child.jjtAccept(this, null));
 	}
 
 	/**

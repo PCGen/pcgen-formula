@@ -15,6 +15,11 @@
  */
 package pcgen.base.solver;
 
+import static pcgen.base.solver.SolverUtilities.createDependencyTo;
+import static pcgen.base.solver.SolverUtilities.getNode;
+import static pcgen.base.solver.SolverUtilities.sinkNodeIs;
+import static pcgen.base.solver.SolverUtilities.sourceNodeIs;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -182,19 +187,11 @@ public class AggressiveSolverManager implements SolverManager
 		DependencyManager fdm = managerFactory.generateDependencyManager(formulaManager,
 			source, varID.getFormatManager().getManagedClass());
 		modifier.getDependencies(fdm);
-		for (VariableID<?> depID : fdm.getVariables())
-		{
-			ensureSolverExists(depID);
-			/*
-			 * Better to use depID here rather than Solver: (1) No order of operations
-			 * risk (2) Process can still write to cache knowing ID
-			 */
-			@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-			DefaultDirectionalGraphEdge<VariableID<?>> edge =
-					new DefaultDirectionalGraphEdge<VariableID<?>>(depID, varID);
-			dependencies.addEdge(edge);
-		}
-		//Cast above effectively enforced here
+		fdm.getVariables().stream()
+						  .peek(this::ensureSolverExists)
+						  .map(createDependencyTo(varID))
+						  .forEach(dependencies::addEdge);
+		//Cast of Solver<T> above effectively enforced here
 		solver.addModifier(modifier, source);
 		/*
 		 * Solve this solver and anything that requires it (recursively)
@@ -272,20 +269,12 @@ public class AggressiveSolverManager implements SolverManager
 		{
 			return;
 		}
-		Set<DefaultDirectionalGraphEdge<VariableID<?>>> edges =
-				dependencies.getAdjacentEdges(varID);
-		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : edges)
-		{
-			if (edge.getNodeAt(1) == varID)
-			{
-				VariableID<?> depID = edge.getNodeAt(0);
-				if (deps.contains(depID))
-				{
-					dependencies.removeEdge(edge);
-					deps.remove(depID);
-				}
-			}
-		}
+		dependencies.getAdjacentEdges(varID).stream()
+											.filter(sinkNodeIs(varID))
+											.filter(edge -> deps.contains(edge.getNodeAt(0)))
+											.peek(dependencies::removeEdge)
+											.map(getNode(0))
+											.forEach(deps::remove);
 		if (!deps.isEmpty())
 		{
 			/*
@@ -340,13 +329,10 @@ public class AggressiveSolverManager implements SolverManager
 				dependencies.getAdjacentEdges(varID);
 		if (adjacentEdges != null)
 		{
-			for (DefaultDirectionalGraphEdge<VariableID<?>> edge : adjacentEdges)
-			{
-				if (edge.getNodeAt(0).equals(varID))
-				{
-					solveFromNode(edge.getNodeAt(1));
-				}
-			}
+			adjacentEdges.stream()
+						 .filter(sourceNodeIs(varID))
+						 .map(getNode(1))
+						 .forEach(this::solveFromNode);
 		}
 	}
 

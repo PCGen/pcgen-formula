@@ -18,6 +18,8 @@
 package pcgen.base.formula.inst;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 import pcgen.base.formula.base.OperatorAction;
 import pcgen.base.formula.base.OperatorLibrary;
@@ -87,23 +89,20 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 	public FormatManager<?> processAbstract(Operator operator, Class<?> format)
 	{
 		List<UnaryAction> actionList = unaryMTL.getListFor(operator);
-		if (actionList != null)
+		if (actionList == null)
 		{
-			for (UnaryAction action : actionList)
-			{
-				FormatManager<?> result = action.abstractEvaluate(format);
-				/*
-				 * null indicates the UnaryAction can't evaluate these, but try
-				 * another (don't unconditionally return result because another
-				 * UnaryAction might work)
-				 */
-				if (result != null)
-				{
-					return result;
-				}
-			}
+			return null;
 		}
-		return null;
+		/*
+		 * null on abstractEvaluate indicates the UnaryAction can't evaluate these, but it
+		 * should fall through to another in list (don't unconditionally fail because
+		 * another UnaryAction might work)
+		 */
+		return actionList.stream()
+						 .map(action -> action.abstractEvaluate(format))
+						 .filter(Objects::nonNull)
+						 .findFirst()
+						 .orElse(null);
 	}
 
 	@Override
@@ -132,29 +131,30 @@ public class SimpleOperatorLibrary implements OperatorLibrary
 				+ o2.getClass().getSimpleName());
 	}
 
+	public static Predicate<? super OperatorAction> canEval(Object o1, Object o2)
+	{
+		return action -> action.abstractEvaluate(o1.getClass(), o2.getClass()) != null;
+	}
+
 	@Override
 	public FormatManager<?> processAbstract(Operator operator, Class<?> format1,
 		Class<?> format2)
 	{
 		List<OperatorAction> actionList = operatorMTL.getListFor(operator);
-		if (actionList != null)
+		if (actionList == null)
 		{
-			for (OperatorAction action : actionList)
-			{
-				FormatManager<?> result =
-						action.abstractEvaluate(format1, format2);
-				/*
-				 * null indicates the OperatorAction can't evaluate these, but
-				 * try another (don't unconditionally return result because
-				 * another OperatorAction might work)
-				 */
-				if (result != null)
-				{
-					return result;
-				}
-			}
+			return null;
 		}
-		return null;
+		/*
+		 * null on abstractEvaluate indicates the OperatorAction can't evaluate these, but
+		 * it should fall through to another in list (don't unconditionally fail because
+		 * another OperatorAction might work)
+		 */
+		return actionList.stream()
+						 .map(action -> action.abstractEvaluate(format1, format2))
+						 .filter(Objects::nonNull)
+						 .findFirst()
+						 .orElse(null);
 	}
 
 }
