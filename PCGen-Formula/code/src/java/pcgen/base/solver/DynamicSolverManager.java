@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.DynamicDependency;
@@ -328,12 +329,13 @@ public class DynamicSolverManager implements SolverManager
 		{
 			return;
 		}
-		dependencies.getAdjacentEdges(varID).stream()
-											.filter(sinkNodeIs(varID))
-											.filter(edge -> deps.contains(edge.getNodeAt(0)))
-											.peek(dependencies::removeEdge)
-											.map(getNode(0))
-											.forEach(deps::remove);
+		//DO NOT INLINE - bug in Java 8 R 141
+		Stream<VariableID<?>> str = dependencies.getAdjacentEdges(varID).stream()
+												.filter(sinkNodeIs(varID))
+												.filter(edge -> deps.contains(edge.getNodeAt(0)))
+												.peek(dependencies::removeEdge)
+												.map(getNode(0));
+		str.forEach(deps::remove);
 		if (!deps.isEmpty())
 		{
 			/*
@@ -418,10 +420,10 @@ public class DynamicSolverManager implements SolverManager
 				dependencies.getAdjacentEdges(varID);
 		if (adjacentEdges != null)
 		{
-			adjacentEdges.stream()
-						 .filter(sourceNodeIs(varID))
-						 .map(getNode(1))
-						 .forEach(this::solveFromNode);
+			//DO NOT INLINE - bug in Java 8 R 141
+			Stream<VariableID<?>> str =
+					adjacentEdges.stream().filter(sourceNodeIs(varID)).map(getNode(1));
+			str.forEach(this::solveFromNode);
 		}
 	}
 
