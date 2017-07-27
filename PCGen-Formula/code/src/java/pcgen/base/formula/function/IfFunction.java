@@ -161,15 +161,8 @@ public class IfFunction implements Function
 		 * used... but that is not a corner case we will spend time on right
 		 * now...
 		 */
-		for (Node n : args)
-		{
-			Boolean result = (Boolean) n.jjtAccept(visitor, null);
-			if (!result.booleanValue())
-			{
-				return Boolean.FALSE;
-			}
-		}
-		return Boolean.TRUE;
+		return Arrays.stream(args)
+					 .allMatch(n -> (Boolean) n.jjtAccept(visitor, null));
 	}
 
 	/**

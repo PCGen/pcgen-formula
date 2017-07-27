@@ -163,14 +163,6 @@ public class DependencyManager
 	public List<VariableID<?>> getVariables()
 	{
 		List<VariableID<?>> vars = get(VARIABLES);
-		if (vars == null)
-		{
-			vars = Collections.emptyList();
-		}
-		else
-		{
-			vars = new ArrayList<>(vars);
-		}
-		return vars;
+		return (vars == null) ? Collections.emptyList() : new ArrayList<>(vars);
 	}
 }

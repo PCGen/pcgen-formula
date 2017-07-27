@@ -127,15 +127,8 @@ public abstract class AbstractNaryFunction implements Function
 	@Override
 	public Boolean isStatic(StaticVisitor visitor, Node[] args)
 	{
-		for (Node n : args)
-		{
-			Boolean result = (Boolean) n.jjtAccept(visitor, null);
-			if (!result.booleanValue())
-			{
-				return Boolean.FALSE;
-			}
-		}
-		return Boolean.TRUE;
+		return Arrays.stream(args)
+					 .allMatch(n -> (Boolean) n.jjtAccept(visitor, null));
 	}
 
 	/**
@@ -158,10 +151,7 @@ public abstract class AbstractNaryFunction implements Function
 	public void getDependencies(DependencyVisitor visitor,
 		DependencyManager manager, Node[] args)
 	{
-		for (Node n : args)
-		{
-			n.jjtAccept(visitor, manager);
-		}
+		Arrays.stream(args).forEach(n -> n.jjtAccept(visitor, manager));
 	}
 
 	/**

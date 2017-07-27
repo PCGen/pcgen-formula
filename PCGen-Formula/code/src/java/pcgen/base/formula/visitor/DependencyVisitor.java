@@ -284,11 +284,7 @@ public class DependencyVisitor implements FormulaParserVisitor
 	 */
 	private Object checkAllChildren(SimpleNode node, Object data)
 	{
-		int childCount = node.jjtGetNumChildren();
-		for (int i = 0; i < childCount; i++)
-		{
-			node.jjtGetChild(i).jjtAccept(this, data);
-		}
+		node.getChildStream().forEach(child -> child.jjtAccept(this, data));
 		return data;
 	}
 }

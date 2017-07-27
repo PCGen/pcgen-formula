@@ -35,7 +35,6 @@ import pcgen.base.formula.parse.ASTUnaryMinus;
 import pcgen.base.formula.parse.ASTUnaryNot;
 import pcgen.base.formula.parse.FormulaParserTreeConstants;
 import pcgen.base.formula.parse.FormulaParserVisitor;
-import pcgen.base.formula.parse.Node;
 import pcgen.base.formula.parse.Operator;
 import pcgen.base.formula.parse.SimpleNode;
 
@@ -178,12 +177,7 @@ public class SimpleDumpVisitor implements FormulaParserVisitor
 			System.err.print(node.getText());
 		}
 		System.err.println();
-		int numChildren = node.jjtGetNumChildren();
-		for (int i = 0; i < numChildren; i++)
-		{
-			Node child = node.jjtGetChild(i);
-			child.jjtAccept(this, data + " ");
-		}
+		node.getChildStream().forEach(child -> child.jjtAccept(this, data + " "));
 		return null;
 	}
 }

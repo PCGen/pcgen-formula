@@ -15,12 +15,18 @@
  */
 package pcgen.base.solver;
 
+import static pcgen.base.solver.SolverUtilities.createDependencyTo;
+import static pcgen.base.solver.SolverUtilities.getNode;
+import static pcgen.base.solver.SolverUtilities.sinkNodeIs;
+import static pcgen.base.solver.SolverUtilities.sourceNodeIs;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 import pcgen.base.formula.base.DependencyManager;
 import pcgen.base.formula.base.DynamicDependency;
@@ -196,7 +202,11 @@ public class DynamicSolverManager implements SolverManager
 			source, varID.getFormatManager().getManagedClass());
 		fdm = fdm.getWith(DependencyManager.DYNAMIC, new DynamicManager());
 		modifier.getDependencies(fdm);
-		addDirectDependencies(varID, fdm);
+		//Add direct dependencies
+		fdm.getVariables().stream()
+						  .peek(this::ensureSolverExists)
+						  .map(createDependencyTo(varID))
+						  .forEach(dependencies::addEdge);
 		addDynamicDependencies(varID, fdm);
 		//Cast above effectively enforced here
 		solver.addModifier(modifier, source);
@@ -232,22 +242,6 @@ public class DynamicSolverManager implements SolverManager
 				DynamicEdge de = new DynamicEdge(controlVar, edge, dep);
 				dynamic.addEdge(de);
 			}
-		}
-	}
-
-	private <T> void addDirectDependencies(VariableID<T> varID, DependencyManager fdm)
-	{
-		for (VariableID<?> depID : fdm.getVariables())
-		{
-			ensureSolverExists(depID);
-			/*
-			 * Better to use depID here rather than Solver: (1) No order of operations
-			 * risk (2) Process can still write to cache knowing ID
-			 */
-			@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
-			DefaultDirectionalGraphEdge<VariableID<?>> edge =
-					new DefaultDirectionalGraphEdge<>(depID, varID);
-			dependencies.addEdge(edge);
 		}
 	}
 
@@ -335,20 +329,13 @@ public class DynamicSolverManager implements SolverManager
 		{
 			return;
 		}
-		Set<DefaultDirectionalGraphEdge<VariableID<?>>> edges =
-				dependencies.getAdjacentEdges(varID);
-		for (DefaultDirectionalGraphEdge<VariableID<?>> edge : edges)
-		{
-			if (edge.getNodeAt(1) == varID)
-			{
-				VariableID<?> depID = edge.getNodeAt(0);
-				if (deps.contains(depID))
-				{
-					dependencies.removeEdge(edge);
-					deps.remove(depID);
-				}
-			}
-		}
+		//DO NOT INLINE - bug in Java 8 R 141
+		Stream<VariableID<?>> str = dependencies.getAdjacentEdges(varID).stream()
+												.filter(sinkNodeIs(varID))
+												.filter(edge -> deps.contains(edge.getNodeAt(0)))
+												.peek(dependencies::removeEdge)
+												.map(getNode(0));
+		str.forEach(deps::remove);
 		if (!deps.isEmpty())
 		{
 			/*
@@ -433,13 +420,10 @@ public class DynamicSolverManager implements SolverManager
 				dependencies.getAdjacentEdges(varID);
 		if (adjacentEdges != null)
 		{
-			for (DefaultDirectionalGraphEdge<VariableID<?>> edge : adjacentEdges)
-			{
-				if (edge.getNodeAt(0).equals(varID))
-				{
-					solveFromNode(edge.getNodeAt(1));
-				}
-			}
+			//DO NOT INLINE - bug in Java 8 R 141
+			Stream<VariableID<?>> str =
+					adjacentEdges.stream().filter(sourceNodeIs(varID)).map(getNode(1));
+			str.forEach(this::solveFromNode);
 		}
 	}
 
