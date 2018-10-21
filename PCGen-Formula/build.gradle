@@ -24,8 +24,8 @@ description = """PCGen formula library"""
 
 defaultTasks 'clean', 'build'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 ext {
     majorVersion = 1
