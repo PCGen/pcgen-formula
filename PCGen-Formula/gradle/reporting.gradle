@@ -24,9 +24,4 @@ pmd {
 	toolVersion = "5.8.1"
 }
 
-jdepend {
-	ignoreFailures = true
-	sourceSets = []
-}
-
-task allReports { dependsOn = ['checkstyleMain', 'pmdMain', 'jdependMain'] }
+task allReports { dependsOn = ['checkstyleMain', 'pmdMain'] }
