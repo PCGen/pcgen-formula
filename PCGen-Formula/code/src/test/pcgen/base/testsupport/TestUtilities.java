@@ -72,7 +72,6 @@ public final class TestUtilities
 	public static final Class<Integer[]> INTEGER_ARRAY_CLASS =
 			(Class<Integer[]>) Array.newInstance(INTEGER_CLASS, 0).getClass();
 
-
 	private TestUtilities()
 	{
 		//Do not instantiate utility class
