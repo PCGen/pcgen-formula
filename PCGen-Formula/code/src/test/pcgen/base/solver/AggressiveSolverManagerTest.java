@@ -46,7 +46,7 @@ public class AggressiveSolverManagerTest extends AbstractSolverManagerTest
 	{
 		super.setUp();
 		manager = new AggressiveSolverManager(getFormulaManager(), getManagerFactory(),
-			getSolverFactory(), getVariableStore());
+			getSolverManager());
 	}
 	
 	@AfterEach
@@ -60,11 +60,10 @@ public class AggressiveSolverManagerTest extends AbstractSolverManagerTest
 	@Test
 	public void testIllegalConstruction()
 	{
-		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(null, getManagerFactory(), getSolverFactory(), getVariableStore()));
+		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(null, getManagerFactory(), getSolverManager()));
 		FormulaManager formulaManager = getFormulaManager();
-		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(formulaManager, null, getSolverFactory(), getVariableStore()));
-		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(formulaManager, getManagerFactory(), getSolverFactory(), null));
-		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(formulaManager, getManagerFactory(), getSolverFactory(), null));
+		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(formulaManager, null, getSolverManager()));
+		assertThrows(NullPointerException.class, () -> new AggressiveSolverManager(formulaManager, getManagerFactory(), null));
 	}
 
 	@Override
@@ -86,8 +85,6 @@ public class AggressiveSolverManagerTest extends AbstractSolverManagerTest
 					"STR");
 
 		assertEquals(null, store.get(str));
-		manager.createChannel(str);
-		assertEquals(0, store.get(str));
 
 		SimpleLegalScope localScope = new SimpleLegalScope(globalScope, "STAT");
 		getScopeManager().registerScope(localScope);
