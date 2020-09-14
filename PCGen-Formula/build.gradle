@@ -17,7 +17,7 @@ plugins {
     id 'ivy-publish'
     id 'checkstyle'
     id 'pmd'
-    id 'com.github.ben-manes.versions' version '0.31.0'
+    id 'com.github.ben-manes.versions' version '0.33.0'
     id 'com.github.spotbugs' version '4.5.0'
 }
 
@@ -51,8 +51,8 @@ dependencies {
     implementation group: 'net.sourceforge.pcgen', name: 'PCGen-base', version:'1.0.220'
     testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.7.0'
     testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.7.0'
-    testImplementation group: 'org.junit.jupiter', name:  'junit-jupiter-api', version: '5.6.2'
-    testImplementation group: 'org.junit.jupiter', name:  'junit-jupiter-params', version: '5.6.2'
+    testImplementation group: 'org.junit.jupiter', name:  'junit-jupiter-api', version: '5.7.0'
+    testImplementation group: 'org.junit.jupiter', name:  'junit-jupiter-params', version: '5.7.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
 }
 
